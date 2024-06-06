@@ -27,7 +27,7 @@ add_action('init', 'create_custom_post_type');
 function enqueue_react_scripts() {
     wp_enqueue_script(
         'react-app',
-        plugin_dir_url(__FILE__) . './dist/assets/index-B4OvGnf4.js',
+        plugin_dir_url(__FILE__) . './dist/assets/index-BDmq7y5j.js',
         array('wp-element'),
         time(),
         true
