@@ -1,2 +1,2 @@
-# Ignorowanie katalogu dist
-/dist/
+node_modules/
+dist/
