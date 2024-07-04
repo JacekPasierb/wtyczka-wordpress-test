@@ -1,0 +1,80 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "create-block/form-creator",
+  "version": "0.1.0",
+  "title": "Form Creator",
+  "category": "widgets",
+  "icon": "smiley",
+  "description": "Example block scaffolded with Create Block tool.",
+  "example": {},
+  "attributes": {
+    "formTitle": {
+      "type": "string",
+      "default": "Form Title"
+    },
+    "btnTitle": {
+      "type": "string",
+      "default": "Submit"
+    },
+    "titleFormPayU": {
+      "type": "string",
+      "default": "Payment Details"
+    },
+    "labelService": {
+      "type": "string",
+      "default": "Choose Service"
+    },
+    "serviceOptions": {
+      "type": "string",
+      "default": ""
+    },
+    "labelOptions": {
+      "type": "string",
+      "default": "Turniej A - 200pln:200, Turniej B - 500pln:500, Turniej C - 1000pln:1000"
+    },
+    "titleCost": {
+      "type": "string",
+      "default": "Cost Service"
+    },
+    "fields": {
+      "type": "array",
+      "default": [
+        [
+          {
+            "label": "Name",
+            "type": "Text"
+          },
+          {
+            "label": "Username",
+            "type": "Text"
+          }
+        ],
+        [
+          {
+            "label": "Email",
+            "type": "Email"
+          },
+          {
+            "label": "Phone",
+            "type": "Number"
+          }
+        ]
+      ]
+    },
+    "enablePayU": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "supports": {
+    "color": {
+      "text": true,
+      "link": true,
+      "background": true
+    }
+  },
+  "textdomain": "form-creator",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css"
+}

@@ -1,0 +1,32 @@
+/**
+ * The following styles get applied inside the editor only.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+
+.wp-block-create-block-form-creator {
+	border: 1px dotted #f00;
+}
+.panelBody {
+	background-color: rgb(228, 228, 228);
+}
+.titleRow {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 10px;
+	width: 100%;
+	text-align: center;
+
+	color: #3f01ba;
+	background-color: #d0d0d0;
+}
+.titleRow:hover {
+	cursor: default;
+}
+.block-editor-block-inspector .components-base-control {
+	margin-bottom: 0 !important;
+}
+.selectCtrl {
+	width: 70px;
+}
