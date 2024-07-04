@@ -1,6 +1,15 @@
 jQuery(document).ready(function ($) {
+	$("#service_select").on("change", function (e) {
+		const selectedOption = $(this).val();
+		const selectedOptionL = $(this).find("option:selected").text();
+		
+	});
+
 	$("#your-form-id").on("submit", function (e) {
 		e.preventDefault();
+
+		var amount = $("#service_select").val(); 
+		var description = $("#service_select").find("option:selected").text();
 
 		var formData = {
 			action: "form_creator_payment",
@@ -8,8 +17,8 @@ jQuery(document).ready(function ($) {
 
 			buyer_first_name: $("#buyer_first_name").val(),
 			buyer_last_name: $("#buyer_last_name").val(),
-			amount: 500, // DODAC ELEMENT !!!!!!!!
-			description: "zaw",
+			amount: amount,
+			description: description,
 			_ajax_nonce: formCreatorAjax.nonce,
 		};
 		console.log("Form Data:", formData);

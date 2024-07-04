@@ -179,8 +179,8 @@ function process_form_creator_payment() {
 
         $buyerFirstName = sanitize_text_field($_POST['buyer_first_name']);
         $buyerLastName = sanitize_text_field($_POST['buyer_last_name']);
-        $amount = 500;
-        $description = "zaw";
+        $amount = isset($_POST['amount']) ? sanitize_text_field($_POST['amount']) : 0; 
+        $description = isset($_POST['description']) ? sanitize_text_field($_POST['description']) : '';
 
         error_log("Received POST data: ");
         error_log("buyer_first_name: $buyerFirstName");
