@@ -324,6 +324,7 @@ add_action('template_redirect', 'restrict_thank_you_page');
 
 // Funkcja usuwająca stronę "Thank You"
 function form_creator_delete_thank_you_page() {
+    error_log('Funkcja form_creator_delete_thank_you_page została wywołana.');
     check_ajax_referer('your_nonce_action', '_ajax_nonce');
     error_log('Rozpoczęcie usuwania strony "Thank You"');
     $query = new WP_Query([
