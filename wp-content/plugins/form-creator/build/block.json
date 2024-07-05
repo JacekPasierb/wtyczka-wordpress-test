@@ -37,14 +37,6 @@
       "type": "string",
       "default": "Cost Service"
     },
-    "amount": {
-      "type": "number",
-      "default": 0
-    },
-    "description": {
-      "type": "string",
-      "default": ""
-    },
     "fields": {
       "type": "array",
       "default": [

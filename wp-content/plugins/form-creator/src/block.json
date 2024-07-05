@@ -19,8 +19,6 @@
 			"default": "Turniej A - 200pln:200, Turniej B - 500pln:500, Turniej C - 1000pln:1000"
 		},
 		"titleCost": { "type": "string", "default": "Cost Service" },
-		"amount": { "type": "number", "default": 0 },
-		"description": { "type": "string", "default": "" },
 		"fields": {
 			"type": "array",
 			"default": [

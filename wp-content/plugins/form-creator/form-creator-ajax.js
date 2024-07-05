@@ -1,15 +1,12 @@
 jQuery(document).ready(function ($) {
-	
 	$("#your-form-id").on("submit", function (e) {
 		e.preventDefault();
 
-		var amount = $("#service_select").val(); 
+		var amount = $("#service_select").val();
 		var description = $("#service_select").find("option:selected").text();
 
 		var formData = {
 			action: "form_creator_payment",
-			enable_payu: $("#enable_payu").is(":checked"),
-
 			buyer_first_name: $("#buyer_first_name").val(),
 			buyer_last_name: $("#buyer_last_name").val(),
 			amount: amount,
