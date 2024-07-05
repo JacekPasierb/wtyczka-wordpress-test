@@ -1,10 +1,5 @@
 jQuery(document).ready(function ($) {
-	$("#service_select").on("change", function (e) {
-		const selectedOption = $(this).val();
-		const selectedOptionL = $(this).find("option:selected").text();
-		
-	});
-
+	
 	$("#your-form-id").on("submit", function (e) {
 		e.preventDefault();
 
