@@ -47,6 +47,7 @@ function payu_notify_handler() {
                                  }
                                  
                         verify_signature($body, $signature,$signatureHeader);
+                        
                        } else {
                            error_log("Empty body");
                        }

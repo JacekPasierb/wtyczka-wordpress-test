@@ -1,5 +1,7 @@
 <?php
 
+
+// Funkcja do weryfikacji podpisu PayU
 function verify_signature($body, $signature,$signatureHeader) {
 
     $options = get_option('form_creator_options');
@@ -34,10 +36,10 @@ function verify_signature($body, $signature,$signatureHeader) {
                                     $status = $result->getResponse()->order->status;
                                  
                                            if ($status == 'CANCELED') {
-                                               $payment_success = "2";
+                                           
                                                       error_log("Order is canceled");
                                            } elseif ($status === 'COMPLETED') {
-                                               $payment_success = "1";
+                                         
                                                error_log("Order is completed");
                                             // Uaktualnij status zamówienia lub wykonaj odpowiednie akcje
                                            header("HTTP/1.1 200 OK");
