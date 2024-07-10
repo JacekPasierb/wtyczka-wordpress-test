@@ -148,27 +148,31 @@ function form_creator_create_thank_you_page() {
 
     if (!$query->have_posts()) {
         $thank_you_page_id = wp_insert_post([
-            'post_title'   => '',
-            'post_content' => '<h1>Dziękujemy za dokonanie płatności!</h1><p>Twoja transakcja została pomyślnie zrealizowana. Dziękujemy za dokonanie zakupu.</p>',
+            'post_title'   => "",
+            'post_content' => '[payment_status_message]', // Tutaj dodaj shortcode
             'post_status'  => 'publish',
             'post_type'    => 'page',
         ]);
-
-       
-
+       error_log("pay:$payment_status");
         if ($thank_you_page_id && !is_wp_error($thank_you_page_id)) {
             update_post_meta($thank_you_page_id, '_form_creator_thank_you_page', true);
-          
-        } 
-    } 
+        }
+    }
+  
+
 }
 
+
 // ^^^^^^^^^^^^^^^^^  Tworzenie strony "Thank You" po zakończeniu płatności ^^^^^^^^^^^^^^^^^^^ //
+
+
+
 
 
 // ***************                       FUNKCJA PAYU                *************** //
 function process_form_creator_payment() {
     check_ajax_referer('your_nonce_action', '_ajax_nonce');
+    require 'vendor/autoload.php';
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST' ) {
         $options = get_option('form_creator_options');
@@ -192,20 +196,31 @@ function process_form_creator_payment() {
             wp_send_json_error(['message' => 'Brak wymaganych danych.']);
         }
 
+         // Konfiguracja PayU SDK
+         OpenPayU_Configuration::setEnvironment('sandbox');
+         OpenPayU_Configuration::setMerchantPosId($posId);
+         OpenPayU_Configuration::setSignatureKey($md5Key);
+         OpenPayU_Configuration::setOauthClientId($clientId);
+         OpenPayU_Configuration::setOauthClientSecret($clientSecret);
+
           // Tworzenie strony "Thank You" po submit formularza
           form_creator_create_thank_you_page();
 
           // Pobierz URL strony "Thank You"
         $thank_you_page_url = form_creator_get_thank_you_page_url();
-        $thank_you_page_url_with_param = add_query_arg('payment_success', '1', $thank_you_page_url);
+       
         
-        if (!$thank_you_page_url_with_param) {
+        if (!$thank_you_page_url) {
             $thank_you_page_url_with_param = get_home_url(); // Domyślny URL, jeśli strona nie istnieje
         }
 
+        $notifyUrl = home_url('/wp-admin/admin-ajax.php?action=payu_notify');
+
+
+error_log("notify22: $notifyUrl");
         $orderData = [
-            'notifyUrl' => get_home_url() . '/payu-notify',
-            'continueUrl' =>  $thank_you_page_url_with_param,
+            'notifyUrl' => $notifyUrl,
+            'continueUrl' => $thank_you_page_url , // Domyślny parametr payment_success=0
             'customerIp' => $_SERVER['REMOTE_ADDR'],
             'merchantPosId' => $clientId,
             'description' => $description,
@@ -223,62 +238,29 @@ function process_form_creator_payment() {
                 ],
             ],
         ];
+        try {
+            $response = OpenPayU_Order::create($orderData);
+         
+            $status = $response->getStatus();
 
-        $tokenUrl = 'https://secure.snd.payu.com/pl/standard/user/oauth/authorize';
-        $orderUrl = 'https://secure.snd.payu.com/api/v2_1/orders';
+            error_log("etap1: $status");
+            error_log("res: " . print_r($response, true));
+            
 
-        
-        // Uzyskiwanie tokenu za pomocą cURL
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $tokenUrl);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([
-            'grant_type' => 'client_credentials',
-            'client_id' => $clientId,
-            'client_secret' => $clientSecret,
-        ]));
-        curl_setopt($ch, CURLOPT_HTTPHEADER, [
-            'Content-Type: application/x-www-form-urlencoded',
-        ]);
-        $tokenResponse = curl_exec($ch);
-        if(curl_errno($ch)) {
-            wp_send_json_error(['message' => 'Błąd przy uzyskiwaniu tokenu.']);
+            if ($response->getStatus() == 'SUCCESS') {
+                error_log("yes");
+                
+                $redirect_url = $response->getResponse()->redirectUri;
+                error_log("etap2: $redirect_url");
+                wp_send_json_success(['redirectUrl' => $redirect_url]);
+                
+                
+            } else {
+                wp_send_json_error(['message' => 'Błąd przy tworzeniu zamówienia.']);
+            }
+        } catch (OpenPayU_Exception $e) {
+            wp_send_json_error(['message' => 'Błąd przy tworzeniu zamówienia: ' . $e->getMessage()]);
         }
-        curl_close($ch);
-
-        $tokenData = json_decode($tokenResponse, true);
-        if (isset($tokenData['access_token'])) {
-            $accessToken = $tokenData['access_token'];
-        } else {
-            wp_send_json_error(['message' => 'Błąd przy uzyskiwaniu tokenu.']);
-        }
-
-        // Tworzenie zamówienia za pomocą cURL
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $orderUrl);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($orderData));
-        curl_setopt($ch, CURLOPT_HTTPHEADER, [
-            'Content-Type: application/json',
-            'Authorization: Bearer ' . $accessToken,
-        ]);
-        $orderResponse = curl_exec($ch);
-        if(curl_errno($ch)) {
-            wp_send_json_error(['message' => 'Błąd przy tworzeniu zamówienia.']);
-        }
-        curl_close($ch);
-
-        $orderBody = $orderResponse;
-        $orderData = json_decode($orderBody, true);
-
-        $redirectUrl = isset($orderData['redirectUri']) ? $orderData['redirectUri'] : null;
-        if (!$redirectUrl) {
-            wp_send_json_error(['message' => 'Brak adresu URL do przekierowania.']);
-        }
-
-        wp_send_json_success(['redirectUrl' => $redirectUrl]);
     }
 }
 
@@ -307,50 +289,183 @@ function form_creator_get_thank_you_page_url() {
     ]);
 
     if ($query->have_posts()) {
-        return get_permalink($query->posts[0]->ID);
+       
+       $thank_you_page_url = get_permalink($query->posts[0]->ID);
+      
+       
+
+        return $thank_you_page_url;
     }
 
     return '';
 }
 
-function restrict_thank_you_page() {
-    if (is_page('Thank You') && (!isset($_GET['payment_success']) || $_GET['payment_success'] !== '1')) {
-        wp_redirect(home_url()); // Przekieruj do strony głównej, jeśli parametr nie istnieje
-        exit;
-    }
+
+
+
+function payu_notify_handler() {
+    require 'vendor/autoload.php';
+    
+    // Odczytaj dane z ciała żądania POST
+    $data = file_get_contents('php://input');
+    $body = trim($data);
+    error_log("body: $body");
+
+            try {
+            error_log("Inside try block");
+                       if (!empty($body)) {
+                       error_log("Body is not empty");
+
+                       // Odczytaj notyfikację jako obiekt JSON
+                       $notification = json_decode($body);
+                       error_log("Notification decoded: " . print_r($notification, true));
+                       $headers = getallheaders();
+                       error_log("Headers: " . print_r($headers, true));
+
+                       // Sprawdzenie, czy nagłówek 'Openpayu-Signature' istnieje
+                                   if (isset($headers['Openpayu-Signature'])) {
+                                    error_log("WW");
+                                   $signatureHeader = $headers['Openpayu-Signature'];
+                                   } elseif (isset($headers['X-Openpayu-Signature'])) {
+                                    error_log("OO");
+                                   $signatureHeader = $headers['X-Openpayu-Signature'];
+                        } else {
+                        throw new Exception("Signature header not found");
+                        }
+        
+            // Wyciąganie wartości podpisu z nagłówka
+            $signatureParts = explode(';', $signatureHeader);
+            $signature = '';
+                        foreach ($signatureParts as $part) {
+                                if (strpos($part, 'signature=') === 0) {
+                                $signature = substr($part, 10);
+                                break;
+                                }
+                        }
+            error_log("Signature: $signature");
+                        if (empty($signature)) {
+                        throw new Exception("Signature not found");
+                        }
+
+            // Weryfikacja podpisu
+            $options = get_option('form_creator_options');
+            $clientId = $options['client_id'];
+            $posId = $options['pos_id'];
+            $md5_key = $options['md5_key'];
+            error_log("MD5 Key: $md5_key");
+ // Otwórz PayU SDK
+ OpenPayU_Configuration::setEnvironment('sandbox');
+ OpenPayU_Configuration::setOauthClientId($clientId);
+ OpenPayU_Configuration::setSignatureKey($md5_key);
+ OpenPayU_Configuration::setMerchantPosId($posId);
+
+            // Konstruowanie oczekiwanego podpisu
+            $expected_signature = md5($body . $md5_key);
+            error_log("Expected Signature: $expected_signature");
+            // Upewnienie się, że oba są ciągami znaków
+                      if (!is_string($signature)) {
+                      error_log("Original signature is not a string. Type: " . gettype($signature));
+                      $signature = (string)$signature;
+                      }
+                      if (!is_string($expected_signature)) {
+                      error_log("Expected signature is not a string. Type: " . gettype($expected_signature));
+                      $expected_signature = (string)$expected_signature;
+                      }
+                      if ($signature && hash_equals($expected_signature, $signature)) {
+                      error_log("Signature is valid");
+                      // Logowanie przed wywołaniem funkcji OpenPayU_Order::consumeNotification
+                      error_log("Calling OpenPayU_Order::consumeNotification with body: $body");
+
+                      // Podpis jest prawidłowy, kontynuuj przetwarzanie notyfikacji
+                      $result = OpenPayU_Order::consumeNotification($data,$signatureHeader);
+                      error_log("TO JUZ SIE NIE WYSWIETLA");
+                      error_log("Notification consumed: " . print_r($result, true));
+
+                      // Obsługa rezultatu notyfikacji
+                                    if ($result->getResponse()->order->orderId) {
+                                    $order = OpenPayU_Order::retrieve($result->getResponse()->order->orderId);
+                                    $orderId = $result->getResponse()->order->orderId;
+                                    error_log("id:" . print_r($order, true));
+                                    $status = $result->getResponse()->order->status;
+                                    error_log("Order Retrieved Status: $status");
+                                    if ($status == 'CANCELED') {
+                                        $payment_success = "2";
+ 
+                                        // Wykonaj odpowiednie akcje dla anulowanego zamówienia
+                                        error_log("Order is canceled");
+                                        // Na przykład: zaktualizuj status zamówienia w bazie danych
+                                    } elseif ($status === 'COMPLETED') {
+                                        $payment_success = "1";
+
+                                        
+                                                  error_log("Order is successful");
+                                                  // Uaktualnij status zamówienia lub wykonaj odpowiednie akcje
+                                                  header("HTTP/1.1 200 OK");
+                                                  exit;
+                                              }
+                                    }
+                     } else {
+                         error_log("Invalid PayU Signature");
+                         // Błąd weryfikacji podpisu
+                         header("HTTP/1.1 400 Bad Request");
+                         echo "Invalid PayU Signature";
+                         exit;
+                     }
+                } else {
+                    error_log("Empty body");
+                }
+
+    // Brak danych do przetworzenia
+    header("HTTP/1.1 400 Bad Request");
+    echo "Invalid PayU Notification";
+    exit;
+} catch (OpenPayU_Exception $e) {
+    error_log("OpenPayU Exception: " . $e->getMessage());
+    header("HTTP/1.1 500 Internal Server Error");
+    echo "Error processing PayU Notification: " . $e->getMessage();
+    exit;
+} catch (Exception $e) {
+    error_log("General Exception: " . $e->getMessage());
+    header("HTTP/1.1 500 Internal Server Error");
+    echo "Error processing PayU Notification: " . $e->getMessage();
+    exit;
 }
-add_action('template_redirect', 'restrict_thank_you_page');
+}
 
 
-// Funkcja usuwająca stronę "Thank You"
-function form_creator_delete_thank_you_page() {
-    error_log('Funkcja form_creator_delete_thank_you_page została wywołana.');
-    check_ajax_referer('your_nonce_action', '_ajax_nonce');
-    error_log('Rozpoczęcie usuwania strony "Thank You"');
-    $query = new WP_Query([
-        'post_type' => 'page',
-        'meta_key' => '_form_creator_thank_you_page',
-        'meta_value' => true,
-        'post_status' => 'publish',
-        'posts_per_page' => 1,
-    ]);
 
-    if ($query->have_posts()) {
-        $thank_you_page_id = $query->posts[0]->ID;
-        error_log('Znaleziono stronę "Thank You" z ID: ' . $thank_you_page_id);
-        $result = wp_delete_post($thank_you_page_id, true); // true oznacza natychmiastowe usunięcie bez przeniesienia do kosza
 
-        if ($result) {
-            error_log('Strona "Thank You" została usunięta.');
-            wp_send_json_success(['message' => 'Strona "Thank You" została usunięta.']);
-        } else {
-            error_log('Błąd podczas usuwania strony 11"Thank You".');
-            wp_send_json_error(['message' => 'Błąd podczas usuwania strony "Thank You".']);
+// Rejestracja funkcji AJAX dla zalogowanych i niezalogowanych użytkowników
+add_action('wp_ajax_payu_notify', 'payu_notify_handler');
+add_action('wp_ajax_nopriv_payu_notify', 'payu_notify_handler');
+
+
+    
+
+// Rejestracja funkcji AJAX dla zalogowanych i niezalogowanych użytkowników
+add_action('wp_ajax_payu_notify', 'payu_notify_handler');
+add_action('wp_ajax_nopriv_payu_notify', 'payu_notify_handler');
+
+
+
+
+
+// shortcode do strony z dynamicnzym statusem
+function display_payment_status_message() {
+    if (isset($_GET['payment_success'])) {
+        $payment_success = $_GET['payment_success'];
+error_log("ddd:$payment_success");
+        if ($payment_success == '1') {
+            echo '<h1>Dziękujemy za dokonanie płatności!</h1>';
+            echo '<p>Twoja transakcja została pomyślnie zrealizowana. Dziękujemy za dokonanie zakupu.</p>';
+        } elseif ($payment_success == '2') {
+            echo '<h1>Płatność nie powiodła się</h1>';
+            echo '<p>Twoja transakcja nie została zrealizowana. Prosimy spróbować ponownie.</p>';
         }
     } else {
-        error_log('Strona "Thank You" nie została znaleziona.');
-        wp_send_json_error(['message' => 'Strona "Thank You" nie została znaleziona.']);
+        echo '<h1>Nieznany status płatności</h1>';
+        echo '<p>Nie można określić statusu płatności. Prosimy skontaktować się z obsługą klienta.</p>';
     }
 }
-add_action('wp_ajax_delete_thank_you_page', 'form_creator_delete_thank_you_page');
-add_action('wp_ajax_nopriv_delete_thank_you_page', 'form_creator_delete_thank_you_page');
+add_shortcode('payment_status_message', 'display_payment_status_message');
+

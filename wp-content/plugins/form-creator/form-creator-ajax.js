@@ -30,23 +30,5 @@ jQuery(document).ready(function ($) {
 			});
 	});
 
-	// Dodaj funkcję, która usunie stronę "Thank You" po opuszczeniu
-	$(window).on("beforeunload", function () {
-		console.log("Before unload event triggered.");
-		$.ajax({
-			url: formCreatorAjax.ajax_url,
-			type: "POST",
-			data: {
-				action: "delete_thank_you_page",
-				_ajax_nonce: formCreatorAjax.nonce,
-			},
-			async: false, // aby upewnić się, że żądanie zostanie wykonane przed zamknięciem okna
-		})
-			.done(function (response) {
-				console.log('Strona "Thank You" została usunięta:', response);
-			})
-			.fail(function (xhr, status, error) {
-				console.error('Błąd podczas usuwania strony "Thank You":', error);
-			});
-	});
+	
 });

@@ -67,12 +67,6 @@ const Edit = (props) => {
 			labelService,
 			labelOptions,
 			titleCost,
-			buyerEmail,
-			buyerFirstName,
-			buyerLastName,
-			amount,
-			description,
-			serviceOptions,
 		},
 		setAttributes,
 	} = props;

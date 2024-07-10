@@ -285,13 +285,7 @@ const Edit = props => {
       enablePayU,
       labelService,
       labelOptions,
-      titleCost,
-      buyerEmail,
-      buyerFirstName,
-      buyerLastName,
-      amount,
-      description,
-      serviceOptions
+      titleCost
     },
     setAttributes
   } = props;
