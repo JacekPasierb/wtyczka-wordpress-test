@@ -1,6 +1,6 @@
 <?php
 function form_creator_enqueue_scripts() {
-    wp_enqueue_script('form-creator-ajax', plugin_dir_url(__FILE__) . 'form-creator-ajax.js', ['jquery'], null, true);
+    wp_enqueue_script('form-creator-ajax', plugin_dir_url(__DIR__) . '/form-creator-ajax.js', ['jquery'], null, true);
 
     wp_localize_script('form-creator-ajax', 'formCreatorAjax', [
         'ajax_url' => admin_url('admin-ajax.php'),
