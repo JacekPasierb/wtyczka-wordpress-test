@@ -71,6 +71,10 @@ function process_form_creator_payment() {
             
             if ($response->getStatus() == 'SUCCESS') {
                 $redirect_url = $response->getResponse()->redirectUri;
+                // Wywołanie hooka po udanej płatności
+                error_log("DATAORDER:" . print_r($orderData, true));
+                do_action('openpayu_payment_completed', $orderData);
+
                 wp_send_json_success(['redirectUrl' => $redirect_url]);
             } else {
                 wp_send_json_error(['message' => 'Błąd przy tworzeniu zamówienia.']);
