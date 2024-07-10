@@ -39,19 +39,43 @@ function form_creator_get_thank_you_page_url() {
 add_shortcode('payment_status_message', 'display_payment_status_message');
 
 function display_payment_status_message() {
-    if (isset($_GET['payment_success'])) {
-        $payment_success = $_GET['payment_success'];
-        error_log("ddd:$payment_success");
-        if ($payment_success == '1') {
-            echo '<h1>Dziękujemy za dokonanie płatności!</h1>';
-            echo '<p>Twoja transakcja została pomyślnie zrealizowana. Dziękujemy za dokonanie zakupu.</p>';
-        } elseif ($payment_success == '2') {
-            echo '<h1>Płatność nie powiodła się</h1>';
-            echo '<p>Twoja transakcja nie została zrealizowana. Prosimy spróbować ponownie.</p>';
-        }
-    } else {
-        echo '<h1>Nieznany status płatności</h1>';
-        echo '<p>Nie można określić statusu płatności. Prosimy skontaktować się z obsługą klienta.</p>';
-    }
+   
+    $query_string = $_SERVER['QUERY_STRING'];
+    parse_str($query_string, $params);
+               if (isset($params['error'])) {
+               $error_value = $params['error'];
+                        if($error_value === "501"){
+                        echo '<h1>Płatność nie powiodła się</h1>';
+                        echo '<p>Twoja transakcja nie została zrealizowana. Prosimy spróbować ponownie.</p>';
+                        return;
+                    }
+                
+                }
+    echo '<h1>Dziękujemy za dokonanie płatności!</h1>';
+    echo '<p>Twoja transakcja została pomyślnie zrealizowana. Dziękujemy za dokonanie zakupu.</p>';
+
+
+
+
+// ***  TEN KOD PO ZMIANIE META WYMAGAL RECZNEGO ODSWIEZANIA ***  //
+
+    // function display_payment_status_message() {
+    //     require_once __DIR__ . '/utils/get_thank_you_page_id.php';
+    //     // Pobierz ID strony dziękuję za dokonanie płatności
+    //     $thank_you_page_id = get_thank_you_page_id();
+    //     $payment_status = get_post_meta($thank_you_page_id, '_payment_status', true);
+    // error_log("STST: $payment_status");
+    // if ($payment_status === 'COMPLETED') {
+    //     echo '<h1>Dziękujemy za dokonanie płatności!</h1>';
+    //     echo '<p>Twoja transakcja została pomyślnie zrealizowana. Dziękujemy za dokonanie zakupu.</p>';
+    // } elseif ($payment_status === 'CANCELED') {
+    //     echo '<h1>Płatność nie powiodła się</h1>';
+    //     echo '<p>Twoja transakcja nie została zrealizowana. Prosimy spróbować ponownie.</p>';
+    // }
+         
+    // }
 }
 ?>
+
+
+
