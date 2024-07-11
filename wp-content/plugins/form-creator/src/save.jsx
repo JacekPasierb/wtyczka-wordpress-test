@@ -17,7 +17,8 @@ import { useBlockProps } from "@wordpress/block-editor";
  *
  *
  */
-import "./editor.scss";
+import "./form-styles.css";
+
 import { useState } from "react";
 import apiFetch from "@wordpress/api-fetch";
 
@@ -43,6 +44,7 @@ const save = ({ attributes }) => {
 			{...useBlockProps.save()}
 			id={enablePayU ? "your-form-id" : "other-form"}
 			method="post"
+			className="custom-form"
 		>
 			<h1>{formTitle}</h1>
 			{enablePayU && <h3>Steps 1</h3>}
@@ -52,6 +54,7 @@ const save = ({ attributes }) => {
 					display: "flex",
 					flexDirection: "column",
 				}}
+				className="form-fields"
 			>
 				{fields.map((row, rowIndex) => (
 					<div
@@ -63,6 +66,7 @@ const save = ({ attributes }) => {
 							gap: "10px",
 							alignItems: "center",
 						}}
+						className="form-row"
 					>
 						{Array.isArray(row) ? (
 							row.map((field, index) =>
@@ -70,6 +74,7 @@ const save = ({ attributes }) => {
 									<div
 										key={index}
 										style={{ display: "flex", flexDirection: "column" }}
+										className="form-control"
 									>
 										<label for={`sel` + rowIndex + index}>{field.label}</label>
 										<select
@@ -87,11 +92,11 @@ const save = ({ attributes }) => {
 									<div
 										key={index}
 										style={{ display: "flex", flexDirection: "column" }}
+										className="form-control"
 									>
 										<label for={`inp` + rowIndex + index}>{field.label}</label>
 										<input
 											type={field.type}
-											placeholder={field.label}
 											id={`inp` + rowIndex + index}
 											name={`inp` + rowIndex + index}
 										/>
@@ -113,8 +118,9 @@ const save = ({ attributes }) => {
 							gap: "20px",
 							alignItems: "flex-end",
 						}}
+						className="payu-section"
 					>
-						<div style={{ display: "flex", flexDirection: "column" }}>
+						<div style={{ display: "flex", flexDirection: "column" }} className="form-control">
 							<label htmlFor="service_select">{labelService}</label>
 							<select
 								id="service_select"
@@ -128,7 +134,7 @@ const save = ({ attributes }) => {
 								))}
 							</select>
 						</div>
-						<p style={{ margin: "2px" }}>
+						<p style={{ margin: "2px" }} className="service-cost">
 							<strong>{titleCost}:</strong> <span id="dynamic-cost"></span>
 						</p>
 					</div>
@@ -141,8 +147,9 @@ const save = ({ attributes }) => {
 							flexDirection: "row",
 							gap: "10px",
 						}}
+						className="payu-fields"
 					>
-						<div style={{ display: "flex", flexDirection: "column" }}>
+						<div style={{ display: "flex", flexDirection: "column" }} className="form-control">
 							<label for="buyer_first_name">First Name</label>
 							<input
 								type="text"
@@ -151,7 +158,7 @@ const save = ({ attributes }) => {
 								id="buyer_first_name"
 							/>
 						</div>
-						<div style={{ display: "flex", flexDirection: "column" }}>
+						<div style={{ display: "flex", flexDirection: "column" }} className="form-control">
 							<label for="buyer_last_name">Last Name</label>
 							<input
 								type="text"

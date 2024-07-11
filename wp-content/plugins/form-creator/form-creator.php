@@ -27,3 +27,19 @@ require_once plugin_dir_path(__FILE__) . 'includes/scripts.php';
 require_once plugin_dir_path(__FILE__) . 'includes/hooks/hooks.php';
 require_once plugin_dir_path(__FILE__) . 'includes/hooks-usage.php';
 
+function my_custom_form_styles() {
+    // Ścieżka do stylów w wtyczce
+    $style_path = plugins_url('src/form-styles.css', __FILE__);
+
+    // Zarejestruj style
+    wp_register_style('form-styles', $style_path, array(), '1.0', 'all');
+
+    // Załaduj style w edytorze
+    add_editor_style($style_path);
+
+    // Załaduj style na froncie
+    wp_enqueue_style('form-styles');
+}
+add_action('enqueue_block_editor_assets', 'my_custom_form_styles');
+add_action('wp_enqueue_scripts', 'my_custom_form_styles');
+

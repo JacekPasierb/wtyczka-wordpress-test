@@ -1,6 +1,7 @@
 import { Button, SelectControl, TextControl } from "@wordpress/components";
 
 import React, { useEffect, useState } from "react";
+import "../../form-styles.css";
 
 const Form = ({
 	title,
@@ -48,6 +49,7 @@ const Form = ({
 	return (
 		<form
 			style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+			className="custom-form"
 		>
 			<h1>{title}</h1>
 			{enablePayU && <h3>Steps 1</h3>}
@@ -57,6 +59,7 @@ const Form = ({
 					display: "flex",
 					flexDirection: "column",
 				}}
+				className="form-fields"
 			>
 				{fields.map((row, rowIndex) => (
 					<div
@@ -68,6 +71,7 @@ const Form = ({
 							gap: "10px",
 							alignItems: "center",
 						}}
+						className="form-row"
 					>
 						{Array.isArray(row) ? (
 							row.map((field, index) =>
@@ -90,7 +94,6 @@ const Form = ({
 									<TextControl
 										key={index}
 										label={field.label}
-										placeholder={field.label}
 										type={field.type}
 									/>
 								),
@@ -110,6 +113,7 @@ const Form = ({
 						alignItems: "flex-end",
 						justifyContent: "flex-end",
 					}}
+					className="payu-section"
 				>
 					<SelectControl
 						label={labelService}
@@ -121,7 +125,7 @@ const Form = ({
 						onChange={handleServiceChange}
 					/>
 					{service && (
-						<p style={{ margin: "2px" }}>
+						<p style={{ margin: "2px" }} className="service-cost">
 							<strong>{titleCost}:</strong> {getServiceCost() + "" + "pln"}
 						</p>
 					)}
@@ -139,6 +143,7 @@ const Form = ({
 							flexDirection: "row",
 							gap: "10px",
 						}}
+						className="payu-fields"
 					>
 						<TextControl
 							label="First Name"
