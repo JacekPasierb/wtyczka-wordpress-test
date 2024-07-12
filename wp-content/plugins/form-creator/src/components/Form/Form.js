@@ -125,7 +125,7 @@ const Form = ({
 						onChange={handleServiceChange}
 					/>
 					{service && (
-						<p style={{ margin: "2px" }} className="service-cost">
+						<p  className="service-cost">
 							<strong>{titleCost}:</strong> {getServiceCost() + "" + "pln"}
 						</p>
 					)}
@@ -147,19 +147,19 @@ const Form = ({
 					>
 						<TextControl
 							label="First Name"
-							placeholder="First Name"
+							
 							name="buyer_first_name"
 						/>
 						<TextControl
 							label="Last Name"
-							placeholder="Last Name"
+							
 							name="buyer_last_name"
 						/>
 					</div>
 				</>
 			)}
 
-			<Button variant="primary">{btnTitle}</Button>
+			<button className="button">{btnTitle}</button>
 		</form>
 	);
 };

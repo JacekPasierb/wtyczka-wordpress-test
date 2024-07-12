@@ -134,7 +134,7 @@ const save = ({ attributes }) => {
 								))}
 							</select>
 						</div>
-						<p style={{ margin: "2px" }} className="service-cost">
+						<p  className="service-cost">
 							<strong>{titleCost}:</strong> <span id="dynamic-cost"></span>
 						</p>
 					</div>
@@ -153,7 +153,7 @@ const save = ({ attributes }) => {
 							<label for="buyer_first_name">First Name</label>
 							<input
 								type="text"
-								placeholder="First Name"
+								
 								name="buyer_first_name"
 								id="buyer_first_name"
 							/>
@@ -162,7 +162,7 @@ const save = ({ attributes }) => {
 							<label for="buyer_last_name">Last Name</label>
 							<input
 								type="text"
-								placeholder="Last Name"
+								
 								name="buyer_last_name"
 								id="buyer_last_name"
 							/>
@@ -170,7 +170,7 @@ const save = ({ attributes }) => {
 					</div>
 				</>
 			)}
-			<button type="submit">Submit</button>
+			<button type="submit" className="button">Submit</button>
 		</form>
 	);
 };

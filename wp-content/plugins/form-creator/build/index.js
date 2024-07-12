@@ -110,9 +110,6 @@ const Form = ({
     })),
     onChange: handleServiceChange
   }), service && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
-    style: {
-      margin: "2px"
-    },
     className: "service-cost"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("strong", null, titleCost, ":"), " ", getServiceCost() + "" + "pln")), enablePayU && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", null, "Steps 2"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, titleFormPayU), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     style: {
@@ -124,14 +121,12 @@ const Form = ({
     className: "payu-fields"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     label: "First Name",
-    placeholder: "First Name",
     name: "buyer_first_name"
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     label: "Last Name",
-    placeholder: "Last Name",
     name: "buyer_last_name"
-  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
-    variant: "primary"
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+    className: "button"
   }, btnTitle));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Form);
@@ -667,9 +662,6 @@ const save = ({
     key: index,
     value: option.value
   }, option.label)))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
-    style: {
-      margin: "2px"
-    },
     className: "service-cost"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("strong", null, titleCost, ":"), " ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     id: "dynamic-cost"
@@ -691,7 +683,6 @@ const save = ({
     for: "buyer_first_name"
   }, "First Name"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "text",
-    placeholder: "First Name",
     name: "buyer_first_name",
     id: "buyer_first_name"
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -704,11 +695,11 @@ const save = ({
     for: "buyer_last_name"
   }, "Last Name"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "text",
-    placeholder: "Last Name",
     name: "buyer_last_name",
     id: "buyer_last_name"
   })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
-    type: "submit"
+    type: "submit",
+    className: "button"
   }, "Submit"));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (save);
