@@ -33,7 +33,16 @@ const Form = ({
   fontSizeTitle,
   colorTitle,
   fontSizeLabels,
-  colorLabels
+  colorLabels,
+  paddingTable,
+  gapRow,
+  gapColumn,
+  marginBottomTitle,
+  paddingInlineButton,
+  paddingBlockButton,
+  sizeTextButton,
+  colorTextButton,
+  colorBgButton
 }) => {
   const [service, setService] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)();
   const handleServiceChange = value => {
@@ -61,18 +70,21 @@ const Form = ({
     style: {
       display: "flex",
       flexDirection: "column",
-      alignItems: "center"
+      alignItems: "center",
+      padding: `${paddingTable}px`
     },
     className: "custom-form"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
     style: {
       fontSize: `${fontSizeTitle}px`,
-      color: `${colorTitle}`
+      color: `${colorTitle}`,
+      marginBottom: `${marginBottomTitle}px`
     }
   }, title), enablePayU && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", null, "Steps 1"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     style: {
       display: "flex",
-      flexDirection: "column"
+      flexDirection: "column",
+      gap: `${gapColumn}px`
     },
     className: "form-fields"
   }, fields.map((row, rowIndex) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -81,7 +93,7 @@ const Form = ({
       marginBottom: "10px",
       display: "flex",
       flexDirection: "row",
-      gap: "10px",
+      gap: `${gapRow}px`,
       alignItems: "center"
     },
     className: "form-row"
@@ -135,6 +147,13 @@ const Form = ({
     label: "Last Name",
     name: "buyer_last_name"
   }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+    style: {
+      paddingInline: `${paddingInlineButton}px`,
+      paddingBlock: `${paddingBlockButton}px`,
+      fontSize: `${sizeTextButton}px`,
+      color: `${colorTextButton}`,
+      backgroundColor: `${colorBgButton}`
+    },
     className: "button"
   }, btnTitle));
 };
@@ -300,7 +319,16 @@ const Edit = props => {
       fontSizeTitle,
       colorTitle,
       fontSizeLabels,
-      colorLabels
+      colorLabels,
+      paddingTable,
+      gapRow,
+      gapColumn,
+      marginBottomTitle,
+      paddingInlineButton,
+      paddingBlockButton,
+      sizeTextButton,
+      colorTextButton,
+      colorBgButton
     },
     setAttributes
   } = props;
@@ -446,27 +474,42 @@ const Edit = props => {
     className: "panelBody"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelRow, {
     className: "titleRow"
-  }, "Schema Title"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.FontSizePicker, {
-    fontSizes: [{
-      name: "Small",
-      slug: "small",
-      size: 12
-    }, {
-      name: "Medium",
-      slug: "medium",
-      size: 26
-    }, {
-      name: "Big",
-      slug: "big",
-      size: 44
-    }],
+  }, "Setting Table"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.RangeControl, {
+    label: "Padding Table",
+    value: paddingTable,
+    onChange: value => setAttributes({
+      paddingTable: value
+    }),
+    min: 2,
+    max: 150
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.RangeControl, {
+    label: "Gap Row Fields",
+    value: gapRow,
+    onChange: value => setAttributes({
+      gapRow: value
+    }),
+    min: 2,
+    max: 150
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.RangeControl, {
+    label: "Gap Column Fields",
+    value: gapColumn,
+    onChange: value => setAttributes({
+      gapColumn: value
+    }),
+    min: 2,
+    max: 150
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelRow, {
+    className: "titleRow"
+  }, "Schema Title"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.RangeControl, {
+    label: "Font Size title",
     value: fontSizeTitle,
-    fallbackFontSize: 16,
     onChange: newFontSize => {
       setAttributes({
         fontSizeTitle: newFontSize
       });
-    }
+    },
+    min: 2,
+    max: 150
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ColorPalette, {
     colors: [{
       name: "red",
@@ -482,6 +525,16 @@ const Edit = props => {
     onChange: color => setAttributes({
       colorTitle: color
     })
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.RangeControl, {
+    label: "Set Margin Bottom",
+    value: marginBottomTitle,
+    onChange: value => {
+      setAttributes({
+        marginBottomTitle: value
+      });
+    },
+    min: 2,
+    max: 150
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelRow, {
     className: "titleRow"
   }, "Schema Label"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.FontSizePicker, {
@@ -520,6 +573,66 @@ const Edit = props => {
     onChange: color => setAttributes({
       colorLabels: color
     })
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelRow, {
+    className: "titleRow"
+  }, "Schema Button"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.RangeControl, {
+    label: "Padding Inline Button",
+    value: paddingInlineButton,
+    onChange: value => {
+      setAttributes({
+        paddingInlineButton: value
+      });
+    },
+    min: 2,
+    max: 150
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.RangeControl, {
+    label: "Padding Block Button",
+    value: paddingBlockButton,
+    onChange: value => {
+      setAttributes({
+        paddingBlockButton: value
+      });
+    },
+    min: 2,
+    max: 150
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.RangeControl, {
+    label: "Size Text Button",
+    value: sizeTextButton,
+    onChange: value => {
+      setAttributes({
+        sizeTextButton: value
+      });
+    },
+    min: 2,
+    max: 150
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    style: {
+      marginBottom: "10px",
+      display: "block"
+    }
+  }, "Set Text Color Button"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ColorPicker, {
+    color: colorTextButton,
+    onChange: value => {
+      setAttributes({
+        colorTextButton: value
+      });
+    },
+    enableAlpha: true,
+    defaultValue: "#000"
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    style: {
+      marginBottom: "10px",
+      display: "block"
+    }
+  }, "Set Background Color Button"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ColorPicker, {
+    color: colorBgButton,
+    onChange: value => {
+      setAttributes({
+        colorBgButton: value
+      });
+    },
+    enableAlpha: true,
+    defaultValue: "#000"
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
     title: "PayU Payment Settings",
     initialOpen: false
@@ -568,7 +681,16 @@ const Edit = props => {
     fontSizeTitle: fontSizeTitle,
     colorTitle: colorTitle,
     fontSizeLabels: fontSizeLabels,
-    colorLabels: colorLabels
+    colorLabels: colorLabels,
+    paddingTable: paddingTable,
+    gapRow: gapRow,
+    gapColumn: gapColumn,
+    marginBottomTitle: marginBottomTitle,
+    paddingInlineButton: paddingInlineButton,
+    paddingBlockButton: paddingBlockButton,
+    sizeTextButton: sizeTextButton,
+    colorTextButton: colorTextButton,
+    colorBgButton: colorBgButton
   }));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Edit);
@@ -682,7 +804,16 @@ const save = ({
     titleCost,
     titleFormPayU,
     fontSizeTitle,
-    colorTitle
+    colorTitle,
+    paddingTable,
+    gapColumn,
+    gapRow,
+    marginBottomTitle,
+    paddingInlineButton,
+    paddingBlockButton,
+    sizeTextButton,
+    colorTextButton,
+    colorBgButton
   } = attributes;
   const optionsArray = labelOptions.split(",").map(option => option.split(":")).map(([label, value]) => ({
     label,
@@ -692,16 +823,21 @@ const save = ({
     ..._wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save(),
     id: enablePayU ? "your-form-id" : "other-form",
     method: "post",
+    style: {
+      padding: `${paddingTable}`
+    },
     className: "custom-form"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
     style: {
       fontSize: `${fontSizeTitle}px`,
-      color: `${colorTitle}`
+      color: `${colorTitle}`,
+      marginBottom: `${marginBottomTitle}px`
     }
   }, formTitle), enablePayU && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", null, "Steps 1"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     style: {
       display: "flex",
-      flexDirection: "column"
+      flexDirection: "column",
+      gap: `${gapColumn}px`
     },
     className: "form-fields"
   }, fields.map((row, rowIndex) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -710,7 +846,7 @@ const save = ({
       marginBottom: "10px",
       display: "flex",
       flexDirection: "row",
-      gap: "10px",
+      gap: `${gapRow}px`,
       alignItems: "center"
     },
     className: "form-row"
@@ -802,6 +938,13 @@ const save = ({
     name: "buyer_last_name",
     id: "buyer_last_name"
   })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+    style: {
+      paddingInline: `${paddingInlineButton}px`,
+      paddingBlock: `${paddingBlockButton}px`,
+      fontSize: `${sizeTextButton}px`,
+      color: `${colorTextButton}`,
+      backgroundColor: `${colorBgButton}`
+    },
     type: "submit",
     className: "button"
   }, "Submit"));
@@ -922,7 +1065,7 @@ module.exports = window["wp"]["i18n"];
   \************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/form-creator","version":"0.1.0","title":"Form Creator","category":"widgets","icon":"smiley","description":"Example block scaffolded with Create Block tool.","example":{},"attributes":{"formTitle":{"type":"string","default":"Form Title"},"fontSizeTitle":{"type":"number","default":12},"colorTitle":{"type":"string","default":"#f00"},"fontSizeLabels":{"type":"number","default":12},"colorLabels":{"type":"string","default":"#f00"},"btnTitle":{"type":"string","default":"Submit"},"titleFormPayU":{"type":"string","default":"Payment Details"},"labelService":{"type":"string","default":"Choose Service"},"serviceOptions":{"type":"string","default":""},"labelOptions":{"type":"string","default":"Turniej A - 200pln:200, Turniej B - 500pln:500, Turniej C - 1000pln:1000"},"titleCost":{"type":"string","default":"Cost Service"},"fields":{"type":"array","default":[[{"label":"Name","type":"Text"},{"label":"Username","type":"Text"}],[{"label":"Email","type":"Email"},{"label":"Phone","type":"Number"}]]},"enablePayU":{"type":"boolean","default":false}},"supports":{"color":{"text":true,"link":true,"background":true}},"textdomain":"form-creator","editorScript":"file:./index.js","editorStyle":"file:./index.css"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/form-creator","version":"0.1.0","title":"Form Creator","category":"widgets","icon":"smiley","description":"Example block scaffolded with Create Block tool.","example":{},"attributes":{"formTitle":{"type":"string","default":"Form Title"},"fontSizeTitle":{"type":"number","default":35},"colorTitle":{"type":"string","default":"#f00"},"fontSizeLabels":{"type":"number","default":12},"colorLabels":{"type":"string","default":"#f00"},"paddingTable":{"type":"number","default":5},"gapRow":{"type":"number","default":5},"gapColumn":{"type":"number","default":5},"marginBottomTitle":{"type":"number","default":5},"paddingInlineButton":{"type":"number","default":24},"paddingBlockButton":{"type":"number","default":10},"sizeTextButton":{"type":"number","default":18},"colorTextButton":{"type":"string","default":"#000"},"colorBgButton":{"type":"string","default":"#000"},"btnTitle":{"type":"string","default":"Submit"},"titleFormPayU":{"type":"string","default":"Payment Details"},"labelService":{"type":"string","default":"Choose Service"},"serviceOptions":{"type":"string","default":""},"labelOptions":{"type":"string","default":"Turniej A - 200pln:200, Turniej B - 500pln:500, Turniej C - 1000pln:1000"},"titleCost":{"type":"string","default":"Cost Service"},"fields":{"type":"array","default":[[{"label":"Name","type":"Text"},{"label":"Username","type":"Text"}],[{"label":"Email","type":"Email"},{"label":"Phone","type":"Number"}]]},"enablePayU":{"type":"boolean","default":false}},"supports":{"color":{"text":true,"link":true,"background":true}},"textdomain":"form-creator","editorScript":"file:./index.js","editorStyle":"file:./index.css"}');
 
 /***/ })
 

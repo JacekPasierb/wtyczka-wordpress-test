@@ -34,6 +34,15 @@ const save = ({ attributes }) => {
 		titleFormPayU,
 		fontSizeTitle,
 		colorTitle,
+		paddingTable,
+		gapColumn,
+		gapRow,
+		marginBottomTitle,
+		paddingInlineButton,
+		paddingBlockButton,
+		sizeTextButton,
+		colorTextButton,
+		colorBgButton,
 	} = attributes;
 
 	const optionsArray = labelOptions
@@ -46,9 +55,16 @@ const save = ({ attributes }) => {
 			{...useBlockProps.save()}
 			id={enablePayU ? "your-form-id" : "other-form"}
 			method="post"
+			style={{ padding: `${paddingTable}` }}
 			className="custom-form"
 		>
-			<h1 style={{ fontSize: `${fontSizeTitle}px`, color:`${colorTitle}` }}>
+			<h1
+				style={{
+					fontSize: `${fontSizeTitle}px`,
+					color: `${colorTitle}`,
+					marginBottom: `${marginBottomTitle}px`,
+				}}
+			>
 				{formTitle}
 			</h1>
 			{enablePayU && <h3>Steps 1</h3>}
@@ -57,6 +73,7 @@ const save = ({ attributes }) => {
 				style={{
 					display: "flex",
 					flexDirection: "column",
+					gap: `${gapColumn}px`,
 				}}
 				className="form-fields"
 			>
@@ -67,7 +84,7 @@ const save = ({ attributes }) => {
 							marginBottom: "10px",
 							display: "flex",
 							flexDirection: "row",
-							gap: "10px",
+							gap: `${gapRow}px`,
 							alignItems: "center",
 						}}
 						className="form-row"
@@ -177,7 +194,17 @@ const save = ({ attributes }) => {
 					</div>
 				</>
 			)}
-			<button type="submit" className="button">
+			<button
+				style={{
+					paddingInline: `${paddingInlineButton}px`,
+					paddingBlock: `${paddingBlockButton}px`,
+					fontSize: `${sizeTextButton}px`,
+					color: `${colorTextButton}`,
+					backgroundColor: `${colorBgButton}`,
+				}}
+				type="submit"
+				className="button"
+			>
 				Submit
 			</button>
 		</form>

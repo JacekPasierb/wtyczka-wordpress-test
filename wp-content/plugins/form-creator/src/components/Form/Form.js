@@ -16,6 +16,15 @@ const Form = ({
 	colorTitle,
 	fontSizeLabels,
 	colorLabels,
+	paddingTable,
+	gapRow,
+	gapColumn,
+	marginBottomTitle,
+	paddingInlineButton,
+	paddingBlockButton,
+	sizeTextButton,
+	colorTextButton,
+	colorBgButton,
 }) => {
 	const [service, setService] = useState();
 
@@ -50,20 +59,32 @@ const Form = ({
 		return selectedOption ? selectedOption[1] : "";
 	};
 
-	
-
 	return (
 		<form
-			style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+			style={{
+				display: "flex",
+				flexDirection: "column",
+				alignItems: "center",
+				padding: `${paddingTable}px`,
+			}}
 			className="custom-form"
 		>
-			<h1 style={{fontSize:`${fontSizeTitle}px`, color:`${colorTitle}`}}>{title}</h1>
+			<h1
+				style={{
+					fontSize: `${fontSizeTitle}px`,
+					color: `${colorTitle}`,
+					marginBottom: `${marginBottomTitle}px`,
+				}}
+			>
+				{title}
+			</h1>
 			{enablePayU && <h3>Steps 1</h3>}
 
 			<div
 				style={{
 					display: "flex",
 					flexDirection: "column",
+					gap: `${gapColumn}px`,
 				}}
 				className="form-fields"
 			>
@@ -74,7 +95,7 @@ const Form = ({
 							marginBottom: "10px",
 							display: "flex",
 							flexDirection: "row",
-							gap: "10px",
+							gap: `${gapRow}px`,
 							alignItems: "center",
 						}}
 						className="form-row"
@@ -101,7 +122,6 @@ const Form = ({
 										key={index}
 										label={field.label}
 										type={field.type}
-										
 									/>
 								),
 							)
@@ -132,7 +152,7 @@ const Form = ({
 						onChange={handleServiceChange}
 					/>
 					{service && (
-						<p  className="service-cost">
+						<p className="service-cost">
 							<strong>{titleCost}:</strong> {getServiceCost() + "" + "pln"}
 						</p>
 					)}
@@ -152,21 +172,24 @@ const Form = ({
 						}}
 						className="payu-fields"
 					>
-						<TextControl
-							label="First Name"
-							
-							name="buyer_first_name"
-						/>
-						<TextControl
-							label="Last Name"
-							
-							name="buyer_last_name"
-						/>
+						<TextControl label="First Name" name="buyer_first_name" />
+						<TextControl label="Last Name" name="buyer_last_name" />
 					</div>
 				</>
 			)}
 
-			<button className="button">{btnTitle}</button>
+			<button
+				style={{
+					paddingInline: `${paddingInlineButton}px`,
+					paddingBlock: `${paddingBlockButton}px`,
+					fontSize:`${sizeTextButton}px`,
+					color:`${colorTextButton}`,
+					backgroundColor:`${colorBgButton}`,
+				}}
+				className="button"
+			>
+				{btnTitle}
+			</button>
 		</form>
 	);
 };

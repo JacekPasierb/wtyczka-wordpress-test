@@ -13,6 +13,7 @@ import { __ } from "@wordpress/i18n";
  */
 import {
 	InspectorControls,
+	PanelColorSettings,
 	RichText,
 	useBlockProps,
 } from "@wordpress/block-editor";
@@ -33,6 +34,8 @@ import {
 	Button,
 	FontSizePicker,
 	ColorPalette,
+	RangeControl,
+	ColorPicker,
 } from "@wordpress/components";
 
 /**
@@ -73,10 +76,19 @@ const Edit = (props) => {
 			colorTitle,
 			fontSizeLabels,
 			colorLabels,
+			paddingTable,
+			gapRow,
+			gapColumn,
+			marginBottomTitle,
+			paddingInlineButton,
+			paddingBlockButton,
+			sizeTextButton,
+			colorTextButton,
+			colorBgButton,
 		},
 		setAttributes,
 	} = props;
-
+	
 	const addField = () => {
 		const newField = { label: fieldLabel, type: fieldType };
 		if (fieldType === "select") {
@@ -205,20 +217,45 @@ const Edit = (props) => {
 						onChange={(value) => setAttributes({ btnTitle: value })}
 					/>
 				</PanelBody>
-				<PanelBody title="SCHEMA SETTINGS" initialOpen={false} className="panelBody">
+				<PanelBody
+					title="SCHEMA SETTINGS"
+					initialOpen={false}
+					className="panelBody"
+				>
+					<PanelRow className="titleRow">Setting Table</PanelRow>
+
+					<RangeControl
+						label="Padding Table"
+						value={paddingTable}
+						onChange={(value) => setAttributes({ paddingTable: value })}
+						min={2}
+						max={150}
+					/>
+					<RangeControl
+						label="Gap Row Fields"
+						value={gapRow}
+						onChange={(value) => setAttributes({ gapRow: value })}
+						min={2}
+						max={150}
+					/>
+					<RangeControl
+						label="Gap Column Fields"
+						value={gapColumn}
+						onChange={(value) => setAttributes({ gapColumn: value })}
+						min={2}
+						max={150}
+					/>
 					<PanelRow className="titleRow">Schema Title</PanelRow>
-					<FontSizePicker
-						fontSizes={[
-							{ name: "Small", slug: "small", size: 12 },
-							{ name: "Medium", slug: "medium", size: 26 },
-							{ name: "Big", slug: "big", size: 44 },
-						]}
+					<RangeControl
+						label="Font Size title"
 						value={fontSizeTitle}
-						fallbackFontSize={16}
 						onChange={(newFontSize) => {
 							setAttributes({ fontSizeTitle: newFontSize });
 						}}
+						min={2}
+						max={150}
 					/>
+
 					<ColorPalette
 						colors={[
 							{ name: "red", color: "#f00" },
@@ -227,6 +264,15 @@ const Edit = (props) => {
 						]}
 						value={colorTitle}
 						onChange={(color) => setAttributes({ colorTitle: color })}
+					/>
+					<RangeControl
+						label="Set Margin Bottom"
+						value={marginBottomTitle}
+						onChange={(value) => {
+							setAttributes({ marginBottomTitle: value });
+						}}
+						min={2}
+						max={150}
 					/>
 					<PanelRow className="titleRow">Schema Label</PanelRow>
 					<FontSizePicker
@@ -249,6 +295,59 @@ const Edit = (props) => {
 						]}
 						value={colorLabels}
 						onChange={(color) => setAttributes({ colorLabels: color })}
+					/>
+
+					<PanelRow className="titleRow">Schema Button</PanelRow>
+					<RangeControl
+						label="Padding Inline Button"
+						value={paddingInlineButton}
+						onChange={(value) => {
+							setAttributes({ paddingInlineButton: value });
+						}}
+						min={2}
+						max={150}
+					/>
+					<RangeControl
+						label="Padding Block Button"
+						value={paddingBlockButton}
+						onChange={(value) => {
+							setAttributes({ paddingBlockButton: value });
+						}}
+						min={2}
+						max={150}
+					/>
+					<RangeControl
+						label="Size Text Button"
+						value={sizeTextButton}
+						onChange={(value) => {
+							setAttributes({ sizeTextButton: value });
+						}}
+						min={2}
+						max={150}
+					/>
+					<label style={{ marginBottom: "10px", display: "block" }}>
+						Set Text Color Button
+					</label>
+
+					<ColorPicker
+						color={colorTextButton}
+						onChange={(value) => {
+							setAttributes({ colorTextButton: value });
+						}}
+						enableAlpha
+						defaultValue="#000"
+					/>
+					<label style={{ marginBottom: "10px", display: "block" }}>
+						Set Background Color Button
+					</label>
+
+					<ColorPicker
+						color={colorBgButton}
+						onChange={(value) => {
+							setAttributes({ colorBgButton: value });
+						}}
+						enableAlpha
+						defaultValue="#000"
 					/>
 				</PanelBody>
 				<PanelBody title="PayU Payment Settings" initialOpen={false}>
@@ -300,6 +399,15 @@ const Edit = (props) => {
 				colorTitle={colorTitle}
 				fontSizeLabels={fontSizeLabels}
 				colorLabels={colorLabels}
+				paddingTable={paddingTable}
+				gapRow={gapRow}
+				gapColumn={gapColumn}
+				marginBottomTitle={marginBottomTitle}
+				paddingInlineButton={paddingInlineButton}
+				paddingBlockButton={paddingBlockButton}
+				sizeTextButton={sizeTextButton}
+				colorTextButton={colorTextButton}
+				colorBgButton={colorBgButton}
 			/>
 		</div>
 	);

@@ -15,7 +15,7 @@
     },
     "fontSizeTitle": {
       "type": "number",
-      "default": 12
+      "default": 35
     },
     "colorTitle": {
       "type": "string",
@@ -28,6 +28,42 @@
     "colorLabels": {
       "type": "string",
       "default": "#f00"
+    },
+    "paddingTable": {
+      "type": "number",
+      "default": 5
+    },
+    "gapRow": {
+      "type": "number",
+      "default": 5
+    },
+    "gapColumn": {
+      "type": "number",
+      "default": 5
+    },
+    "marginBottomTitle": {
+      "type": "number",
+      "default": 5
+    },
+    "paddingInlineButton": {
+      "type": "number",
+      "default": 24
+    },
+    "paddingBlockButton": {
+      "type": "number",
+      "default": 10
+    },
+    "sizeTextButton": {
+      "type": "number",
+      "default": 18
+    },
+    "colorTextButton": {
+      "type": "string",
+      "default": "#000"
+    },
+    "colorBgButton": {
+      "type": "string",
+      "default": "#000"
     },
     "btnTitle": {
       "type": "string",
