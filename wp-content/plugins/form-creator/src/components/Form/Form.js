@@ -12,6 +12,10 @@ const Form = ({
 	labelService,
 	labelOptions,
 	titleCost,
+	fontSizeTitle,
+	colorTitle,
+	fontSizeLabels,
+	colorLabels,
 }) => {
 	const [service, setService] = useState();
 
@@ -46,12 +50,14 @@ const Form = ({
 		return selectedOption ? selectedOption[1] : "";
 	};
 
+	
+
 	return (
 		<form
 			style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
 			className="custom-form"
 		>
-			<h1>{title}</h1>
+			<h1 style={{fontSize:`${fontSizeTitle}px`, color:`${colorTitle}`}}>{title}</h1>
 			{enablePayU && <h3>Steps 1</h3>}
 
 			<div
@@ -95,6 +101,7 @@ const Form = ({
 										key={index}
 										label={field.label}
 										type={field.type}
+										
 									/>
 								),
 							)

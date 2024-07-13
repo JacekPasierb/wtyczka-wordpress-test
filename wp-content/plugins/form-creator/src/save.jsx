@@ -32,6 +32,8 @@ const save = ({ attributes }) => {
 		labelOptions,
 		titleCost,
 		titleFormPayU,
+		fontSizeTitle,
+		colorTitle,
 	} = attributes;
 
 	const optionsArray = labelOptions
@@ -46,7 +48,9 @@ const save = ({ attributes }) => {
 			method="post"
 			className="custom-form"
 		>
-			<h1>{formTitle}</h1>
+			<h1 style={{ fontSize: `${fontSizeTitle}px`, color:`${colorTitle}` }}>
+				{formTitle}
+			</h1>
 			{enablePayU && <h3>Steps 1</h3>}
 
 			<div
@@ -120,7 +124,10 @@ const save = ({ attributes }) => {
 						}}
 						className="payu-section"
 					>
-						<div style={{ display: "flex", flexDirection: "column" }} className="form-control">
+						<div
+							style={{ display: "flex", flexDirection: "column" }}
+							className="form-control"
+						>
 							<label htmlFor="service_select">{labelService}</label>
 							<select
 								id="service_select"
@@ -134,7 +141,7 @@ const save = ({ attributes }) => {
 								))}
 							</select>
 						</div>
-						<p  className="service-cost">
+						<p className="service-cost">
 							<strong>{titleCost}:</strong> <span id="dynamic-cost"></span>
 						</p>
 					</div>
@@ -149,28 +156,30 @@ const save = ({ attributes }) => {
 						}}
 						className="payu-fields"
 					>
-						<div style={{ display: "flex", flexDirection: "column" }} className="form-control">
+						<div
+							style={{ display: "flex", flexDirection: "column" }}
+							className="form-control"
+						>
 							<label for="buyer_first_name">First Name</label>
 							<input
 								type="text"
-								
 								name="buyer_first_name"
 								id="buyer_first_name"
 							/>
 						</div>
-						<div style={{ display: "flex", flexDirection: "column" }} className="form-control">
+						<div
+							style={{ display: "flex", flexDirection: "column" }}
+							className="form-control"
+						>
 							<label for="buyer_last_name">Last Name</label>
-							<input
-								type="text"
-								
-								name="buyer_last_name"
-								id="buyer_last_name"
-							/>
+							<input type="text" name="buyer_last_name" id="buyer_last_name" />
 						</div>
 					</div>
 				</>
 			)}
-			<button type="submit" className="button">Submit</button>
+			<button type="submit" className="button">
+				Submit
+			</button>
 		</form>
 	);
 };

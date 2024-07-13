@@ -29,7 +29,11 @@ const Form = ({
   titleFormPayU,
   labelService,
   labelOptions,
-  titleCost
+  titleCost,
+  fontSizeTitle,
+  colorTitle,
+  fontSizeLabels,
+  colorLabels
 }) => {
   const [service, setService] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)();
   const handleServiceChange = value => {
@@ -60,7 +64,12 @@ const Form = ({
       alignItems: "center"
     },
     className: "custom-form"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", null, title), enablePayU && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", null, "Steps 1"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
+    style: {
+      fontSize: `${fontSizeTitle}px`,
+      color: `${colorTitle}`
+    }
+  }, title), enablePayU && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", null, "Steps 1"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     style: {
       display: "flex",
       flexDirection: "column"
@@ -287,7 +296,11 @@ const Edit = props => {
       enablePayU,
       labelService,
       labelOptions,
-      titleCost
+      titleCost,
+      fontSizeTitle,
+      colorTitle,
+      fontSizeLabels,
+      colorLabels
     },
     setAttributes
   } = props;
@@ -428,6 +441,86 @@ const Edit = props => {
       btnTitle: value
     })
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
+    title: "SCHEMA SETTINGS",
+    initialOpen: false,
+    className: "panelBody"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelRow, {
+    className: "titleRow"
+  }, "Schema Title"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.FontSizePicker, {
+    fontSizes: [{
+      name: "Small",
+      slug: "small",
+      size: 12
+    }, {
+      name: "Medium",
+      slug: "medium",
+      size: 26
+    }, {
+      name: "Big",
+      slug: "big",
+      size: 44
+    }],
+    value: fontSizeTitle,
+    fallbackFontSize: 16,
+    onChange: newFontSize => {
+      setAttributes({
+        fontSizeTitle: newFontSize
+      });
+    }
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ColorPalette, {
+    colors: [{
+      name: "red",
+      color: "#f00"
+    }, {
+      name: "white",
+      color: "#fff"
+    }, {
+      name: "blue",
+      color: "#00f"
+    }],
+    value: colorTitle,
+    onChange: color => setAttributes({
+      colorTitle: color
+    })
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelRow, {
+    className: "titleRow"
+  }, "Schema Label"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.FontSizePicker, {
+    fontSizes: [{
+      name: "Small",
+      slug: "small",
+      size: 12
+    }, {
+      name: "Medium",
+      slug: "medium",
+      size: 26
+    }, {
+      name: "Big",
+      slug: "big",
+      size: 44
+    }],
+    value: fontSizeLabels,
+    fallbackFontSize: 16,
+    onChange: newFontSize => {
+      setAttributes({
+        fontSizeLabels: newFontSize
+      });
+    }
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ColorPalette, {
+    colors: [{
+      name: "red",
+      color: "#f00"
+    }, {
+      name: "white",
+      color: "#fff"
+    }, {
+      name: "blue",
+      color: "#00f"
+    }],
+    value: colorLabels,
+    onChange: color => setAttributes({
+      colorLabels: color
+    })
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
     title: "PayU Payment Settings",
     initialOpen: false
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.CheckboxControl, {
@@ -471,7 +564,11 @@ const Edit = props => {
     titleFormPayU: titleFormPayU,
     labelService: labelService,
     labelOptions: labelOptions,
-    titleCost: titleCost
+    titleCost: titleCost,
+    fontSizeTitle: fontSizeTitle,
+    colorTitle: colorTitle,
+    fontSizeLabels: fontSizeLabels,
+    colorLabels: colorLabels
   }));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Edit);
@@ -583,7 +680,9 @@ const save = ({
     labelService,
     labelOptions,
     titleCost,
-    titleFormPayU
+    titleFormPayU,
+    fontSizeTitle,
+    colorTitle
   } = attributes;
   const optionsArray = labelOptions.split(",").map(option => option.split(":")).map(([label, value]) => ({
     label,
@@ -594,7 +693,12 @@ const save = ({
     id: enablePayU ? "your-form-id" : "other-form",
     method: "post",
     className: "custom-form"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", null, formTitle), enablePayU && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", null, "Steps 1"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
+    style: {
+      fontSize: `${fontSizeTitle}px`,
+      color: `${colorTitle}`
+    }
+  }, formTitle), enablePayU && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", null, "Steps 1"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     style: {
       display: "flex",
       flexDirection: "column"
@@ -818,7 +922,7 @@ module.exports = window["wp"]["i18n"];
   \************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/form-creator","version":"0.1.0","title":"Form Creator","category":"widgets","icon":"smiley","description":"Example block scaffolded with Create Block tool.","example":{},"attributes":{"formTitle":{"type":"string","default":"Form Title"},"btnTitle":{"type":"string","default":"Submit"},"titleFormPayU":{"type":"string","default":"Payment Details"},"labelService":{"type":"string","default":"Choose Service"},"serviceOptions":{"type":"string","default":""},"labelOptions":{"type":"string","default":"Turniej A - 200pln:200, Turniej B - 500pln:500, Turniej C - 1000pln:1000"},"titleCost":{"type":"string","default":"Cost Service"},"fields":{"type":"array","default":[[{"label":"Name","type":"Text"},{"label":"Username","type":"Text"}],[{"label":"Email","type":"Email"},{"label":"Phone","type":"Number"}]]},"enablePayU":{"type":"boolean","default":false}},"supports":{"color":{"text":true,"link":true,"background":true}},"textdomain":"form-creator","editorScript":"file:./index.js","editorStyle":"file:./index.css"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/form-creator","version":"0.1.0","title":"Form Creator","category":"widgets","icon":"smiley","description":"Example block scaffolded with Create Block tool.","example":{},"attributes":{"formTitle":{"type":"string","default":"Form Title"},"fontSizeTitle":{"type":"number","default":12},"colorTitle":{"type":"string","default":"#f00"},"fontSizeLabels":{"type":"number","default":12},"colorLabels":{"type":"string","default":"#f00"},"btnTitle":{"type":"string","default":"Submit"},"titleFormPayU":{"type":"string","default":"Payment Details"},"labelService":{"type":"string","default":"Choose Service"},"serviceOptions":{"type":"string","default":""},"labelOptions":{"type":"string","default":"Turniej A - 200pln:200, Turniej B - 500pln:500, Turniej C - 1000pln:1000"},"titleCost":{"type":"string","default":"Cost Service"},"fields":{"type":"array","default":[[{"label":"Name","type":"Text"},{"label":"Username","type":"Text"}],[{"label":"Email","type":"Email"},{"label":"Phone","type":"Number"}]]},"enablePayU":{"type":"boolean","default":false}},"supports":{"color":{"text":true,"link":true,"background":true}},"textdomain":"form-creator","editorScript":"file:./index.js","editorStyle":"file:./index.css"}');
 
 /***/ })
 

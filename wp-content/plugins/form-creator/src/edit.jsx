@@ -31,6 +31,8 @@ import {
 	PanelRow,
 	SelectControl,
 	Button,
+	FontSizePicker,
+	ColorPalette,
 } from "@wordpress/components";
 
 /**
@@ -67,6 +69,10 @@ const Edit = (props) => {
 			labelService,
 			labelOptions,
 			titleCost,
+			fontSizeTitle,
+			colorTitle,
+			fontSizeLabels,
+			colorLabels,
 		},
 		setAttributes,
 	} = props;
@@ -199,6 +205,52 @@ const Edit = (props) => {
 						onChange={(value) => setAttributes({ btnTitle: value })}
 					/>
 				</PanelBody>
+				<PanelBody title="SCHEMA SETTINGS" initialOpen={false} className="panelBody">
+					<PanelRow className="titleRow">Schema Title</PanelRow>
+					<FontSizePicker
+						fontSizes={[
+							{ name: "Small", slug: "small", size: 12 },
+							{ name: "Medium", slug: "medium", size: 26 },
+							{ name: "Big", slug: "big", size: 44 },
+						]}
+						value={fontSizeTitle}
+						fallbackFontSize={16}
+						onChange={(newFontSize) => {
+							setAttributes({ fontSizeTitle: newFontSize });
+						}}
+					/>
+					<ColorPalette
+						colors={[
+							{ name: "red", color: "#f00" },
+							{ name: "white", color: "#fff" },
+							{ name: "blue", color: "#00f" },
+						]}
+						value={colorTitle}
+						onChange={(color) => setAttributes({ colorTitle: color })}
+					/>
+					<PanelRow className="titleRow">Schema Label</PanelRow>
+					<FontSizePicker
+						fontSizes={[
+							{ name: "Small", slug: "small", size: 12 },
+							{ name: "Medium", slug: "medium", size: 26 },
+							{ name: "Big", slug: "big", size: 44 },
+						]}
+						value={fontSizeLabels}
+						fallbackFontSize={16}
+						onChange={(newFontSize) => {
+							setAttributes({ fontSizeLabels: newFontSize });
+						}}
+					/>
+					<ColorPalette
+						colors={[
+							{ name: "red", color: "#f00" },
+							{ name: "white", color: "#fff" },
+							{ name: "blue", color: "#00f" },
+						]}
+						value={colorLabels}
+						onChange={(color) => setAttributes({ colorLabels: color })}
+					/>
+				</PanelBody>
 				<PanelBody title="PayU Payment Settings" initialOpen={false}>
 					<CheckboxControl
 						label="Enable PayU Payment"
@@ -244,6 +296,10 @@ const Edit = (props) => {
 				labelService={labelService}
 				labelOptions={labelOptions}
 				titleCost={titleCost}
+				fontSizeTitle={fontSizeTitle}
+				colorTitle={colorTitle}
+				fontSizeLabels={fontSizeLabels}
+				colorLabels={colorLabels}
 			/>
 		</div>
 	);

@@ -13,6 +13,22 @@
       "type": "string",
       "default": "Form Title"
     },
+    "fontSizeTitle": {
+      "type": "number",
+      "default": 12
+    },
+    "colorTitle": {
+      "type": "string",
+      "default": "#f00"
+    },
+    "fontSizeLabels": {
+      "type": "number",
+      "default": 12
+    },
+    "colorLabels": {
+      "type": "string",
+      "default": "#f00"
+    },
     "btnTitle": {
       "type": "string",
       "default": "Submit"
