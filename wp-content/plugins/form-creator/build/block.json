@@ -31,7 +31,7 @@
     },
     "paddingTable": {
       "type": "number",
-      "default": 5
+      "default": 30
     },
     "gapRow": {
       "type": "number",
@@ -59,11 +59,35 @@
     },
     "colorTextButton": {
       "type": "string",
-      "default": "#000"
+      "default": "#FFFFFF"
     },
     "colorBgButton": {
       "type": "string",
-      "default": "#000"
+      "default": "#000000"
+    },
+    "colorBgTable": {
+      "type": "string",
+      "default": "#FFFFFF"
+    },
+    "hoverColorBgButton": {
+      "type": "string",
+      "default": "#FFFFFF"
+    },
+    "hoverColorTextButton": {
+      "type": "string",
+      "default": "#000000"
+    },
+    "marginTopBtn": {
+      "type": "number",
+      "default": 30
+    },
+    "alignment": {
+      "type": "string",
+      "default": "start"
+    },
+    "alignmentBtn": {
+      "type": "string",
+      "default": "start"
     },
     "btnTitle": {
       "type": "string",

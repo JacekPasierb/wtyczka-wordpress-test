@@ -41,91 +41,95 @@
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./src/form-styles.css ***!
   \*************************************************************************************************************************************************************************/
 .custom-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #b7ff10;
-    padding: 20px;
-    border: 1px solid #ddd;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-color: #b7ff10;
+	padding: 20px;
+	border: 1px solid #ddd;
 }
 
 .custom-form h1 {
-    font-size: 45px;
+	font-size: 45px;
 }
 
 .custom-form h3 {
-    font-size: 30px;
+	font-size: 30px;
 }
 
 .form-fields {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
 .form-row {
-    margin-bottom: 10px;
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    align-items: center;
+	margin-bottom: 10px;
+	display: flex;
+	flex-direction: row;
+	gap: 10px;
+	align-items: center;
 }
 
 .form-control {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
 .payu-section {
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
-    align-items: flex-end;
+	display: flex;
+	flex-direction: row;
+	gap: 20px;
+	align-items: flex-end;
 }
 
 .payu-fields {
-    margin-bottom: 10px;
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
+	margin-bottom: 10px;
+	display: flex;
+	flex-direction: row;
+	gap: 10px;
 }
 
 .service-cost {
-    margin: 2px;
-    font-size: 12px;
+	margin: 2px;
+	font-size: 12px;
 }
 
-.form-row  label,
+.form-row label,
 .payu-fields label,
 .payu-section label {
-    font-size: 18px !important;
-    text-transform: none;
-    margin-bottom: 5px;
-    color: #000000 ;
+	font-size: 18px !important;
+	text-transform: none;
+	margin-bottom: 5px;
+	color: #000000;
 }
-
 
 input,
 select {
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+	padding: 5px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
 }
 .custom-form button,
 .custom-form .button {
-    background-color: #4CAF50; 
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    border-radius: 10px;
-    border: none;
+	background-color: var(--bg-color);
+	color: var(--color);
+	font-size: var(--font-size) !important;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+    margin-top: var(--margin-top);
+	
+	border-radius: 10px;
+	border: none;
+
+	cursor: pointer;
+	transition: all 0.3s ease;
 }
 
 .custom-form button:hover,
 .custom-form .button:hover {
-    background-color: #45a049; 
+	background-color: var(--hover-bg-color) !important;
+	color: var(--hover-text-color) !important;
 }
+

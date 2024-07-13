@@ -42,7 +42,13 @@ const Form = ({
   paddingBlockButton,
   sizeTextButton,
   colorTextButton,
-  colorBgButton
+  colorBgButton,
+  hoverColorBgButton,
+  hoverColorTextButton,
+  marginTopBtn,
+  alignment,
+  alignmentBtn,
+  colorBgTable
 }) => {
   const [service, setService] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)();
   const handleServiceChange = value => {
@@ -70,7 +76,7 @@ const Form = ({
     style: {
       display: "flex",
       flexDirection: "column",
-      alignItems: "center",
+      backgroundColor: `${colorBgTable}`,
       padding: `${paddingTable}px`
     },
     className: "custom-form"
@@ -78,7 +84,8 @@ const Form = ({
     style: {
       fontSize: `${fontSizeTitle}px`,
       color: `${colorTitle}`,
-      marginBottom: `${marginBottomTitle}px`
+      marginBottom: `${marginBottomTitle}px`,
+      alignSelf: `${alignment}`
     }
   }, title), enablePayU && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", null, "Steps 1"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     style: {
@@ -150,9 +157,13 @@ const Form = ({
     style: {
       paddingInline: `${paddingInlineButton}px`,
       paddingBlock: `${paddingBlockButton}px`,
-      fontSize: `${sizeTextButton}px`,
-      color: `${colorTextButton}`,
-      backgroundColor: `${colorBgButton}`
+      alignSelf: `${alignmentBtn}`,
+      "--margin-top": `${marginTopBtn}px`,
+      "--font-size": `${sizeTextButton}px`,
+      "--color": `${colorTextButton}`,
+      "--bg-color": `${colorBgButton}`,
+      "--hover-bg-color": `${hoverColorBgButton}`,
+      "--hover-text-color": `${hoverColorTextButton}`
     },
     className: "button"
   }, btnTitle));
@@ -328,7 +339,13 @@ const Edit = props => {
       paddingBlockButton,
       sizeTextButton,
       colorTextButton,
-      colorBgButton
+      colorBgButton,
+      hoverColorBgButton,
+      hoverColorTextButton,
+      marginTopBtn,
+      alignment,
+      alignmentBtn,
+      colorBgTable
     },
     setAttributes
   } = props;
@@ -498,6 +515,20 @@ const Edit = props => {
     }),
     min: 2,
     max: 150
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    style: {
+      marginBottom: "10px",
+      display: "block"
+    }
+  }, "Set Background Color"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ColorPicker, {
+    color: colorBgTable,
+    onChange: value => {
+      setAttributes({
+        colorBgTable: value
+      });
+    },
+    enableAlpha: true,
+    defaultValue: "#000"
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelRow, {
     className: "titleRow"
   }, "Schema Title"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.RangeControl, {
@@ -510,7 +541,25 @@ const Edit = props => {
     },
     min: 2,
     max: 150
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ColorPalette, {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.CheckboxControl, {
+    label: "Left",
+    checked: alignment === "start",
+    onChange: isChecked => isChecked && setAttributes({
+      alignment: "start"
+    })
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.CheckboxControl, {
+    label: "Center",
+    checked: alignment === "center",
+    onChange: isChecked => isChecked && setAttributes({
+      alignment: "center"
+    })
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.CheckboxControl, {
+    label: "Right",
+    checked: alignment === "end",
+    onChange: isChecked => isChecked && setAttributes({
+      alignment: "end"
+    })
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ColorPalette, {
     colors: [{
       name: "red",
       color: "#f00"
@@ -605,6 +654,34 @@ const Edit = props => {
     },
     min: 2,
     max: 150
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.CheckboxControl, {
+    label: "Left",
+    checked: alignmentBtn === "start",
+    onChange: isChecked => isChecked && setAttributes({
+      alignmentBtn: "start"
+    })
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.CheckboxControl, {
+    label: "Center",
+    checked: alignmentBtn === "center",
+    onChange: isChecked => isChecked && setAttributes({
+      alignmentBtn: "center"
+    })
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.CheckboxControl, {
+    label: "Right",
+    checked: alignmentBtn === "end",
+    onChange: isChecked => isChecked && setAttributes({
+      alignmentBtn: "end"
+    })
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.RangeControl, {
+    label: "Set Margin Top",
+    value: marginTopBtn,
+    onChange: value => {
+      setAttributes({
+        marginTopBtn: value
+      });
+    },
+    min: 2,
+    max: 150
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     style: {
       marginBottom: "10px",
@@ -629,6 +706,34 @@ const Edit = props => {
     onChange: value => {
       setAttributes({
         colorBgButton: value
+      });
+    },
+    enableAlpha: true,
+    defaultValue: "#000"
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    style: {
+      marginBottom: "10px",
+      display: "block"
+    }
+  }, "Set Hover Background Color Button"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ColorPicker, {
+    color: hoverColorBgButton,
+    onChange: value => {
+      setAttributes({
+        hoverColorBgButton: value
+      });
+    },
+    enableAlpha: true,
+    defaultValue: "#000"
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    style: {
+      marginBottom: "10px",
+      display: "block"
+    }
+  }, "Set Hover Text Color Button"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ColorPicker, {
+    color: hoverColorTextButton,
+    onChange: value => {
+      setAttributes({
+        hoverColorTextButton: value
       });
     },
     enableAlpha: true,
@@ -690,7 +795,13 @@ const Edit = props => {
     paddingBlockButton: paddingBlockButton,
     sizeTextButton: sizeTextButton,
     colorTextButton: colorTextButton,
-    colorBgButton: colorBgButton
+    colorBgButton: colorBgButton,
+    hoverColorBgButton: hoverColorBgButton,
+    hoverColorTextButton: hoverColorTextButton,
+    marginTopBtn: marginTopBtn,
+    alignment: alignment,
+    alignmentBtn: alignmentBtn,
+    colorBgTable: colorBgTable
   }));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Edit);
@@ -813,7 +924,12 @@ const save = ({
     paddingBlockButton,
     sizeTextButton,
     colorTextButton,
-    colorBgButton
+    colorBgButton,
+    hoverColorBgButton,
+    hoverColorTextButton,
+    marginTopBtn,
+    alignment,
+    colorBgTable
   } = attributes;
   const optionsArray = labelOptions.split(",").map(option => option.split(":")).map(([label, value]) => ({
     label,
@@ -824,14 +940,16 @@ const save = ({
     id: enablePayU ? "your-form-id" : "other-form",
     method: "post",
     style: {
-      padding: `${paddingTable}`
+      padding: `${paddingTable}px`,
+      backgroundColor: `${colorBgTable}`
     },
     className: "custom-form"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
     style: {
       fontSize: `${fontSizeTitle}px`,
       color: `${colorTitle}`,
-      marginBottom: `${marginBottomTitle}px`
+      marginBottom: `${marginBottomTitle}px`,
+      alignSelf: `${alignment}`
     }
   }, formTitle), enablePayU && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", null, "Steps 1"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     style: {
@@ -943,7 +1061,10 @@ const save = ({
       paddingBlock: `${paddingBlockButton}px`,
       fontSize: `${sizeTextButton}px`,
       color: `${colorTextButton}`,
-      backgroundColor: `${colorBgButton}`
+      backgroundColor: `${colorBgButton}`,
+      "--margin-top": `${marginTopBtn}px`,
+      "--hover-bg-color": `${hoverColorBgButton}`,
+      "--hover-text-button": `${hoverColorTextButton}`
     },
     type: "submit",
     className: "button"
@@ -1065,7 +1186,7 @@ module.exports = window["wp"]["i18n"];
   \************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/form-creator","version":"0.1.0","title":"Form Creator","category":"widgets","icon":"smiley","description":"Example block scaffolded with Create Block tool.","example":{},"attributes":{"formTitle":{"type":"string","default":"Form Title"},"fontSizeTitle":{"type":"number","default":35},"colorTitle":{"type":"string","default":"#f00"},"fontSizeLabels":{"type":"number","default":12},"colorLabels":{"type":"string","default":"#f00"},"paddingTable":{"type":"number","default":5},"gapRow":{"type":"number","default":5},"gapColumn":{"type":"number","default":5},"marginBottomTitle":{"type":"number","default":5},"paddingInlineButton":{"type":"number","default":24},"paddingBlockButton":{"type":"number","default":10},"sizeTextButton":{"type":"number","default":18},"colorTextButton":{"type":"string","default":"#000"},"colorBgButton":{"type":"string","default":"#000"},"btnTitle":{"type":"string","default":"Submit"},"titleFormPayU":{"type":"string","default":"Payment Details"},"labelService":{"type":"string","default":"Choose Service"},"serviceOptions":{"type":"string","default":""},"labelOptions":{"type":"string","default":"Turniej A - 200pln:200, Turniej B - 500pln:500, Turniej C - 1000pln:1000"},"titleCost":{"type":"string","default":"Cost Service"},"fields":{"type":"array","default":[[{"label":"Name","type":"Text"},{"label":"Username","type":"Text"}],[{"label":"Email","type":"Email"},{"label":"Phone","type":"Number"}]]},"enablePayU":{"type":"boolean","default":false}},"supports":{"color":{"text":true,"link":true,"background":true}},"textdomain":"form-creator","editorScript":"file:./index.js","editorStyle":"file:./index.css"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/form-creator","version":"0.1.0","title":"Form Creator","category":"widgets","icon":"smiley","description":"Example block scaffolded with Create Block tool.","example":{},"attributes":{"formTitle":{"type":"string","default":"Form Title"},"fontSizeTitle":{"type":"number","default":35},"colorTitle":{"type":"string","default":"#f00"},"fontSizeLabels":{"type":"number","default":12},"colorLabels":{"type":"string","default":"#f00"},"paddingTable":{"type":"number","default":30},"gapRow":{"type":"number","default":5},"gapColumn":{"type":"number","default":5},"marginBottomTitle":{"type":"number","default":5},"paddingInlineButton":{"type":"number","default":24},"paddingBlockButton":{"type":"number","default":10},"sizeTextButton":{"type":"number","default":18},"colorTextButton":{"type":"string","default":"#FFFFFF"},"colorBgButton":{"type":"string","default":"#000000"},"colorBgTable":{"type":"string","default":"#FFFFFF"},"hoverColorBgButton":{"type":"string","default":"#FFFFFF"},"hoverColorTextButton":{"type":"string","default":"#000000"},"marginTopBtn":{"type":"number","default":30},"alignment":{"type":"string","default":"start"},"alignmentBtn":{"type":"string","default":"start"},"btnTitle":{"type":"string","default":"Submit"},"titleFormPayU":{"type":"string","default":"Payment Details"},"labelService":{"type":"string","default":"Choose Service"},"serviceOptions":{"type":"string","default":""},"labelOptions":{"type":"string","default":"Turniej A - 200pln:200, Turniej B - 500pln:500, Turniej C - 1000pln:1000"},"titleCost":{"type":"string","default":"Cost Service"},"fields":{"type":"array","default":[[{"label":"Name","type":"Text"},{"label":"Username","type":"Text"}],[{"label":"Email","type":"Email"},{"label":"Phone","type":"Number"}]]},"enablePayU":{"type":"boolean","default":false}},"supports":{"color":{"text":true,"link":true,"background":true}},"textdomain":"form-creator","editorScript":"file:./index.js","editorStyle":"file:./index.css"}');
 
 /***/ })
 

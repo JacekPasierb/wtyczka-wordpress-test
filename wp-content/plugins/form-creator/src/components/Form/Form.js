@@ -25,6 +25,12 @@ const Form = ({
 	sizeTextButton,
 	colorTextButton,
 	colorBgButton,
+	hoverColorBgButton,
+	hoverColorTextButton,
+	marginTopBtn,
+	alignment,
+	alignmentBtn,
+	colorBgTable,
 }) => {
 	const [service, setService] = useState();
 
@@ -64,7 +70,7 @@ const Form = ({
 			style={{
 				display: "flex",
 				flexDirection: "column",
-				alignItems: "center",
+				backgroundColor: `${colorBgTable}`,
 				padding: `${paddingTable}px`,
 			}}
 			className="custom-form"
@@ -74,6 +80,7 @@ const Form = ({
 					fontSize: `${fontSizeTitle}px`,
 					color: `${colorTitle}`,
 					marginBottom: `${marginBottomTitle}px`,
+					alignSelf: `${alignment}`,
 				}}
 			>
 				{title}
@@ -182,9 +189,13 @@ const Form = ({
 				style={{
 					paddingInline: `${paddingInlineButton}px`,
 					paddingBlock: `${paddingBlockButton}px`,
-					fontSize:`${sizeTextButton}px`,
-					color:`${colorTextButton}`,
-					backgroundColor:`${colorBgButton}`,
+					alignSelf: `${alignmentBtn}`,
+					"--margin-top": `${marginTopBtn}px`,
+					"--font-size": `${sizeTextButton}px`,
+					"--color": `${colorTextButton}`,
+					"--bg-color": `${colorBgButton}`,
+					"--hover-bg-color": `${hoverColorBgButton}`,
+					"--hover-text-color": `${hoverColorTextButton}`,
 				}}
 				className="button"
 			>

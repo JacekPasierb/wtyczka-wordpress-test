@@ -43,6 +43,11 @@ const save = ({ attributes }) => {
 		sizeTextButton,
 		colorTextButton,
 		colorBgButton,
+		hoverColorBgButton,
+		hoverColorTextButton,
+		marginTopBtn,
+		alignment,
+		colorBgTable,
 	} = attributes;
 
 	const optionsArray = labelOptions
@@ -55,7 +60,10 @@ const save = ({ attributes }) => {
 			{...useBlockProps.save()}
 			id={enablePayU ? "your-form-id" : "other-form"}
 			method="post"
-			style={{ padding: `${paddingTable}` }}
+			style={{
+				padding: `${paddingTable}px`,
+				backgroundColor: `${colorBgTable}`,
+			}}
 			className="custom-form"
 		>
 			<h1
@@ -63,6 +71,7 @@ const save = ({ attributes }) => {
 					fontSize: `${fontSizeTitle}px`,
 					color: `${colorTitle}`,
 					marginBottom: `${marginBottomTitle}px`,
+					alignSelf: `${alignment}`,
 				}}
 			>
 				{formTitle}
@@ -201,6 +210,9 @@ const save = ({ attributes }) => {
 					fontSize: `${sizeTextButton}px`,
 					color: `${colorTextButton}`,
 					backgroundColor: `${colorBgButton}`,
+					"--margin-top": `${marginTopBtn}px`,
+					"--hover-bg-color": `${hoverColorBgButton}`,
+					"--hover-text-button": `${hoverColorTextButton}`,
 				}}
 				type="submit"
 				className="button"

@@ -36,6 +36,7 @@ import {
 	ColorPalette,
 	RangeControl,
 	ColorPicker,
+	RadioControl,
 } from "@wordpress/components";
 
 /**
@@ -85,10 +86,16 @@ const Edit = (props) => {
 			sizeTextButton,
 			colorTextButton,
 			colorBgButton,
+			hoverColorBgButton,
+			hoverColorTextButton,
+			marginTopBtn,
+			alignment,
+			alignmentBtn,
+			colorBgTable,
 		},
 		setAttributes,
 	} = props;
-	
+
 	const addField = () => {
 		const newField = { label: fieldLabel, type: fieldType };
 		if (fieldType === "select") {
@@ -245,6 +252,18 @@ const Edit = (props) => {
 						min={2}
 						max={150}
 					/>
+					<label style={{ marginBottom: "10px", display: "block" }}>
+						Set Background Color
+					</label>
+
+					<ColorPicker
+						color={colorBgTable}
+						onChange={(value) => {
+							setAttributes({ colorBgTable: value });
+						}}
+						enableAlpha
+						defaultValue="#000"
+					/>
 					<PanelRow className="titleRow">Schema Title</PanelRow>
 					<RangeControl
 						label="Font Size title"
@@ -256,6 +275,29 @@ const Edit = (props) => {
 						max={150}
 					/>
 
+					<PanelRow>
+						<CheckboxControl
+							label="Left"
+							checked={alignment === "start"}
+							onChange={(isChecked) =>
+								isChecked && setAttributes({ alignment: "start" })
+							}
+						/>
+						<CheckboxControl
+							label="Center"
+							checked={alignment === "center"}
+							onChange={(isChecked) =>
+								isChecked && setAttributes({ alignment: "center" })
+							}
+						/>
+						<CheckboxControl
+							label="Right"
+							checked={alignment === "end"}
+							onChange={(isChecked) =>
+								isChecked && setAttributes({ alignment: "end" })
+							}
+						/>
+					</PanelRow>
 					<ColorPalette
 						colors={[
 							{ name: "red", color: "#f00" },
@@ -325,6 +367,38 @@ const Edit = (props) => {
 						min={2}
 						max={150}
 					/>
+					<PanelRow>
+						<CheckboxControl
+							label="Left"
+							checked={alignmentBtn === "start"}
+							onChange={(isChecked) =>
+								isChecked && setAttributes({ alignmentBtn: "start" })
+							}
+						/>
+						<CheckboxControl
+							label="Center"
+							checked={alignmentBtn === "center"}
+							onChange={(isChecked) =>
+								isChecked && setAttributes({ alignmentBtn: "center" })
+							}
+						/>
+						<CheckboxControl
+							label="Right"
+							checked={alignmentBtn === "end"}
+							onChange={(isChecked) =>
+								isChecked && setAttributes({ alignmentBtn: "end" })
+							}
+						/>
+					</PanelRow>
+					<RangeControl
+						label="Set Margin Top"
+						value={marginTopBtn}
+						onChange={(value) => {
+							setAttributes({ marginTopBtn: value });
+						}}
+						min={2}
+						max={150}
+					/>
 					<label style={{ marginBottom: "10px", display: "block" }}>
 						Set Text Color Button
 					</label>
@@ -345,6 +419,28 @@ const Edit = (props) => {
 						color={colorBgButton}
 						onChange={(value) => {
 							setAttributes({ colorBgButton: value });
+						}}
+						enableAlpha
+						defaultValue="#000"
+					/>
+					<label style={{ marginBottom: "10px", display: "block" }}>
+						Set Hover Background Color Button
+					</label>
+					<ColorPicker
+						color={hoverColorBgButton}
+						onChange={(value) => {
+							setAttributes({ hoverColorBgButton: value });
+						}}
+						enableAlpha
+						defaultValue="#000"
+					/>
+					<label style={{ marginBottom: "10px", display: "block" }}>
+						Set Hover Text Color Button
+					</label>
+					<ColorPicker
+						color={hoverColorTextButton}
+						onChange={(value) => {
+							setAttributes({ hoverColorTextButton: value });
 						}}
 						enableAlpha
 						defaultValue="#000"
@@ -408,6 +504,12 @@ const Edit = (props) => {
 				sizeTextButton={sizeTextButton}
 				colorTextButton={colorTextButton}
 				colorBgButton={colorBgButton}
+				hoverColorBgButton={hoverColorBgButton}
+				hoverColorTextButton={hoverColorTextButton}
+				marginTopBtn={marginTopBtn}
+				alignment={alignment}
+				alignmentBtn={alignmentBtn}
+				colorBgTable={colorBgTable}
 			/>
 		</div>
 	);
