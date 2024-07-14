@@ -3,33 +3,7 @@ import { SelectControl, TextControl } from "@wordpress/components";
 import React, { useEffect, useState } from "react";
 import "../../form-styles.css";
 
-const Form = ({
-	title,
-	fields,
-	btnTitle,
-	enablePayU,
-	titleFormPayU,
-	labelService,
-	labelOptions,
-	titleCost,
-	fontSizeTitle,
-	colorTitle,
-	paddingTable,
-	gapRow,
-	gapColumn,
-	marginBottomTitle,
-	paddingInlineButton,
-	paddingBlockButton,
-	sizeTextButton,
-	colorTextButton,
-	colorBgButton,
-	hoverColorBgButton,
-	hoverColorTextButton,
-	marginTopBtn,
-	alignment,
-	alignmentBtn,
-	colorBgTable,
-}) => {
+const Form = ({ attributes }) => {
 	const [service, setService] = useState();
 
 	const handleServiceChange = (value) => {
@@ -37,7 +11,7 @@ const Form = ({
 	};
 
 	useEffect(() => {
-		const serviceOptions = labelOptions
+		const serviceOptions = attributes.labelOptions
 			.split(",")
 			.map((option) => option.split(":"))
 			.map(([label, value]) => ({ label, value }));
@@ -45,7 +19,7 @@ const Form = ({
 		if (serviceOptions.length > 0) {
 			setService(serviceOptions[0].value);
 		}
-	}, [labelOptions]);
+	}, [attributes.labelOptions]);
 
 	const handleClick = (e) => {
 		e.preventDefault();
@@ -55,7 +29,7 @@ const Form = ({
 	const getServiceCost = () => {
 		if (!service) return "";
 
-		const selectedOption = labelOptions
+		const selectedOption = attributes.labelOptions
 			.split(",")
 			.map((option) => option.split(":"))
 			.find(([label, value]) => value === service);
@@ -68,39 +42,39 @@ const Form = ({
 			style={{
 				display: "flex",
 				flexDirection: "column",
-				backgroundColor: `${colorBgTable}`,
-				padding: `${paddingTable}px`,
+				backgroundColor: `${attributes.colorBgTable}`,
+				padding: `${attributes.paddingTable}px`,
 			}}
 			className="custom-form"
 		>
 			<h1
 				style={{
-					fontSize: `${fontSizeTitle}px`,
-					color: `${colorTitle}`,
-					marginBottom: `${marginBottomTitle}px`,
-					alignSelf: `${alignment}`,
+					fontSize: `${attributes.fontSizeTitle}px`,
+					color: `${attributes.colorTitle}`,
+					marginBottom: `${attributes.marginBottomTitle}px`,
+					alignSelf: `${attributes.alignment}`,
 				}}
 			>
-				{title}
+				{attributes.formTitle}
 			</h1>
-			{enablePayU && <h3>Steps 1</h3>}
+			{attributes.enablePayU && <h3>Steps 1</h3>}
 
 			<div
 				style={{
 					display: "flex",
 					flexDirection: "column",
-					gap: `${gapColumn}px`,
+					gap: `${attributes.gapColumn}px`,
 				}}
 				className="form-fields"
 			>
-				{fields.map((row, rowIndex) => (
+				{attributes.fields.map((row, rowIndex) => (
 					<div
 						key={rowIndex}
 						style={{
 							marginBottom: "10px",
 							display: "flex",
 							flexDirection: "row",
-							gap: `${gapRow}px`,
+							gap: `${attributes.gapRow}px`,
 							alignItems: "center",
 						}}
 						className="form-row"
@@ -132,7 +106,7 @@ const Form = ({
 					</div>
 				))}
 			</div>
-			{enablePayU && (
+			{attributes.enablePayU && (
 				<div
 					style={{
 						display: "flex",
@@ -144,9 +118,9 @@ const Form = ({
 					className="payu-section"
 				>
 					<SelectControl
-						label={labelService}
+						label={attributes.labelService}
 						value={service}
-						options={labelOptions
+						options={attributes.labelOptions
 							.split(",")
 							.map((option) => option.split(":"))
 							.map(([label, value]) => ({ label, value }))}
@@ -154,16 +128,17 @@ const Form = ({
 					/>
 					{service && (
 						<p className="service-cost">
-							<strong>{titleCost}:</strong> {getServiceCost() + "" + "pln"}
+							<strong>{attributes.titleCost}:</strong>{" "}
+							{getServiceCost() + "" + "pln"}
 						</p>
 					)}
 				</div>
 			)}
 
-			{enablePayU && (
+			{attributes.enablePayU && (
 				<>
 					<h3>Steps 2</h3>
-					<h2>{titleFormPayU}</h2>
+					<h2>{attributes.titleFormPayU}</h2>
 					<div
 						style={{
 							marginBottom: "10px",
@@ -181,19 +156,19 @@ const Form = ({
 
 			<button
 				style={{
-					paddingInline: `${paddingInlineButton}px`,
-					paddingBlock: `${paddingBlockButton}px`,
-					alignSelf: `${alignmentBtn}`,
-					"--margin-top": `${marginTopBtn}px`,
-					"--font-size": `${sizeTextButton}px`,
-					"--color": `${colorTextButton}`,
-					"--bg-color": `${colorBgButton}`,
-					"--hover-bg-color": `${hoverColorBgButton}`,
-					"--hover-text-color": `${hoverColorTextButton}`,
+					paddingInline: `${attributes.paddingInlineButton}px`,
+					paddingBlock: `${attributes.paddingBlockButton}px`,
+					alignSelf: `${attributes.alignmentBtn}`,
+					"--margin-top": `${attributes.marginTopBtn}px`,
+					"--font-size": `${attributes.sizeTextButton}px`,
+					"--color": `${attributes.colorTextButton}`,
+					"--bg-color": `${attributes.colorBgButton}`,
+					"--hover-bg-color": `${attributes.hoverColorBgButton}`,
+					"--hover-text-color": `${attributes.hoverColorTextButton}`,
 				}}
 				className="button"
 			>
-				{btnTitle}
+				{attributes.btnTitle}
 			</button>
 		</form>
 	);

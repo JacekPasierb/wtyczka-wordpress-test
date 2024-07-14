@@ -44,45 +44,17 @@ import Form from "./components/Form/Form";
 import CreateFormPanel from "./components/panels/CreateFormPanel";
 import SettingsFormPanel from "./components/panels/SettingsFormPanel";
 import SchemaFormPanel from "./components/panels/SchemaFormPanel";
+import OptionFormPanel from "./components/panels/OptionFormPanel";
+import PayuPaymentPanel from "./components/panels/PayuPaymentPanel";
 
 const Edit = (props) => {
 	const blockProps = useBlockProps();
 
 	const {
-		attributes: {
-			formTitle,
-			titleFormPayU,
-			fields,
-			btnTitle,
-			enablePayU,
-			labelService,
-			labelOptions,
-			titleCost,
-			fontSizeTitle,
-			colorTitle,
-
-			paddingTable,
-			gapRow,
-			gapColumn,
-			marginBottomTitle,
-			paddingInlineButton,
-			paddingBlockButton,
-			sizeTextButton,
-			colorTextButton,
-			colorBgButton,
-			hoverColorBgButton,
-			hoverColorTextButton,
-			marginTopBtn,
-			alignment,
-			alignmentBtn,
-			colorBgTable,
-		},
+		attributes: { enablePayU },
 		setAttributes,
 	} = props;
 
-	const handleServiceOptionsChange = (value) => {
-		setAttributes({ labelOptions: value });
-	};
 	return (
 		<div {...blockProps}>
 			<InspectorControls key={"Setting"}>
@@ -98,70 +70,19 @@ const Edit = (props) => {
 					attributes={props.attributes}
 					setAttributes={props.setAttributes}
 				/>
+				<OptionFormPanel
+					attributes={props.attributes}
+					setAttributes={props.setAttributes}
+				/>
 
-				<PanelBody title="PayU Payment Settings" initialOpen={false}>
-					<CheckboxControl
-						label="Enable PayU Payment"
-						checked={enablePayU}
-						onChange={(isChecked) => setAttributes({ enablePayU: isChecked })}
+				{enablePayU && (
+					<PayuPaymentPanel
+						attributes={props.attributes}
+						setAttributes={props.setAttributes}
 					/>
-					{enablePayU && (
-						<>
-							<PanelRow className="titleRow">Create Form PayU</PanelRow>
-							<TextControl
-								label="Set Label"
-								value={labelService}
-								placeholder="Choose service"
-								onChange={(value) => setAttributes({ labelService: value })}
-							/>
-							<TextControl
-								help="(comma separated, format: Name service: value service)"
-								label="Set Label Options "
-								value={labelOptions}
-								onChange={handleServiceOptionsChange}
-							/>
-							<TextControl
-								label="Set Title Cost"
-								value={titleCost}
-								onChange={(value) => setAttributes({ titleCost: value })}
-							/>
-							<TextControl
-								label="Set Title Form PayU"
-								placeholder="Dane do płatności"
-								value={titleFormPayU}
-								onChange={(value) => setAttributes({ titleFormPayU: value })}
-							/>
-						</>
-					)}
-				</PanelBody>
+				)}
 			</InspectorControls>
-			<Form
-				title={formTitle}
-				fields={fields}
-				btnTitle={btnTitle}
-				enablePayU={enablePayU}
-				titleFormPayU={titleFormPayU}
-				labelService={labelService}
-				labelOptions={labelOptions}
-				titleCost={titleCost}
-				fontSizeTitle={fontSizeTitle}
-				colorTitle={colorTitle}
-				paddingTable={paddingTable}
-				gapRow={gapRow}
-				gapColumn={gapColumn}
-				marginBottomTitle={marginBottomTitle}
-				paddingInlineButton={paddingInlineButton}
-				paddingBlockButton={paddingBlockButton}
-				sizeTextButton={sizeTextButton}
-				colorTextButton={colorTextButton}
-				colorBgButton={colorBgButton}
-				hoverColorBgButton={hoverColorBgButton}
-				hoverColorTextButton={hoverColorTextButton}
-				marginTopBtn={marginTopBtn}
-				alignment={alignment}
-				alignmentBtn={alignmentBtn}
-				colorBgTable={colorBgTable}
-			/>
+			<Form attributes={props.attributes} />
 		</div>
 	);
 };

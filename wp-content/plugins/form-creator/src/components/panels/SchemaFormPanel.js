@@ -1,6 +1,4 @@
-import { ColorPicker } from "@wordpress/components";
-import { PanelRow } from "@wordpress/components";
-import { PanelBody } from "@wordpress/components";
+import { ColorPicker, PanelRow, PanelBody } from "@wordpress/components";
 import React from "react";
 
 const SchemaFormPanel = ({ attributes, setAttributes }) => {
