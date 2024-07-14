@@ -58,10 +58,6 @@ const Edit = (props) => {
 	const [fieldType, setFieldType] = useState("text");
 	const [options, setOptions] = useState("");
 	const [addInNewLine, setAddInNewLine] = useState(false);
-	// const [labelOptions, setLabelOptions] = useState(
-	// 	"Turniej A - 200pln:200, Turniej B - 500pln:500, Turniej C - 1000pln:1000",
-	// );
-	// const [titleCost, setTitleCost] = useState("Cost Service");
 
 	const {
 		attributes: {

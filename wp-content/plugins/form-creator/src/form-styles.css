@@ -51,16 +51,18 @@
 	margin: 2px;
 	font-size: 12px;
 }
-
+.components-input-control__label label,
 .form-row label,
 .payu-fields label,
 .payu-section label {
 	font-size: 18px !important;
-	text-transform: none;
+	text-transform: none !important;
 	margin-bottom: 5px;
 	color: #000000;
 }
-
+.components-select-control {
+	gap: 0 !important;
+}
 input,
 select {
 	padding: 5px;
@@ -76,8 +78,8 @@ select {
 	text-decoration: none;
 	display: inline-block;
 	font-size: 16px;
-    margin-top: var(--margin-top);
-	
+	margin-top: var(--margin-top);
+
 	border-radius: 10px;
 	border: none;
 

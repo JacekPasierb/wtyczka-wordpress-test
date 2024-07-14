@@ -17,6 +17,9 @@ const EditField = ({
 	rowIndex,
 	isLast,
 }) => {
+	if (!field.options) {
+		field.options = ["add Select"];
+	}
 	return (
 		<>
 			<div style={{ display: "flex", flexDirection: "row" }}>
@@ -42,7 +45,7 @@ const EditField = ({
 				<TextControl
 					help=" Instructions: (comma separated)"
 					label={" Set Options field of: " + field.label}
-					value={field.options === undefined ? "" : field.options.join(", ")}
+					value={field.options.join(", ")}
 					onChange={(value) => handleOptionsChange(value, rowIndex, index)}
 				/>
 			)}
@@ -50,7 +53,7 @@ const EditField = ({
 				<div
 					style={{
 						marginBottom: "10px",
-						opacity:"0.3",
+						opacity: "0.3",
 						height: "1px",
 						backgroundColor: "white",
 					}}

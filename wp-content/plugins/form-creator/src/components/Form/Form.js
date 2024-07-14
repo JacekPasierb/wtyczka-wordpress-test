@@ -113,16 +113,12 @@ const Form = ({
 									<SelectControl
 										key={index}
 										label={field.label}
-										value={""}
-										options={
-											field.options === undefined
-												? [{ label: "", value: "" }]
-												: field.options.map((option, optionIndex) => ({
-														label: option,
-														value: option,
-														key: optionIndex,
-												  }))
-										}
+										value={field.options[0].value}
+										options={field.options.map((option, optionIndex) => ({
+											label: option,
+											value: option,
+											key: optionIndex,
+										}))}
 									/>
 								) : (
 									<TextControl

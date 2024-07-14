@@ -107,11 +107,8 @@ const Form = ({
   }, Array.isArray(row) ? row.map((field, index) => field.type === "select" ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
     key: index,
     label: field.label,
-    value: "",
-    options: field.options === undefined ? [{
-      label: "",
-      value: ""
-    }] : field.options.map((option, optionIndex) => ({
+    value: field.options[0].value,
+    options: field.options.map((option, optionIndex) => ({
       label: option,
       value: option,
       key: optionIndex
@@ -199,6 +196,9 @@ const EditField = ({
   rowIndex,
   isLast
 }) => {
+  if (!field.options) {
+    field.options = ["add Select"];
+  }
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     style: {
       display: "flex",
@@ -231,7 +231,7 @@ const EditField = ({
   })), field.type === "select" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
     help: " Instructions: (comma separated)",
     label: " Set Options field of: " + field.label,
-    value: field.options === undefined ? "" : field.options.join(", "),
+    value: field.options.join(", "),
     onChange: value => handleOptionsChange(value, rowIndex, index)
   }), !isLast && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     style: {
@@ -312,11 +312,6 @@ const Edit = props => {
   const [fieldType, setFieldType] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)("text");
   const [options, setOptions] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)("");
   const [addInNewLine, setAddInNewLine] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)(false);
-  // const [labelOptions, setLabelOptions] = useState(
-  // 	"Turniej A - 200pln:200, Turniej B - 500pln:500, Turniej C - 1000pln:1000",
-  // );
-  // const [titleCost, setTitleCost] = useState("Cost Service");
-
   const {
     attributes: {
       formTitle,

@@ -78,13 +78,13 @@
 			"type": "number",
 			"default": 30
 		},
-		"alignment":{
-			"type":"string",
-			"default":"start"
+		"alignment": {
+			"type": "string",
+			"default": "start"
 		},
-		"alignmentBtn":{
-			"type":"string",
-			"default":"start"
+		"alignmentBtn": {
+			"type": "string",
+			"default": "start"
 		},
 		"btnTitle": { "type": "string", "default": "Submit" },
 		"titleFormPayU": { "type": "string", "default": "Payment Details" },
