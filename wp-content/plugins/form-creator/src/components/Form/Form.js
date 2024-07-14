@@ -1,4 +1,4 @@
-import { Button, SelectControl, TextControl } from "@wordpress/components";
+import { SelectControl, TextControl } from "@wordpress/components";
 
 import React, { useEffect, useState } from "react";
 import "../../form-styles.css";
@@ -14,8 +14,6 @@ const Form = ({
 	titleCost,
 	fontSizeTitle,
 	colorTitle,
-	fontSizeLabels,
-	colorLabels,
 	paddingTable,
 	gapRow,
 	gapColumn,

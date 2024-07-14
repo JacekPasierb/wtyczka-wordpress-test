@@ -32,8 +32,6 @@ const Form = ({
   titleCost,
   fontSizeTitle,
   colorTitle,
-  fontSizeLabels,
-  colorLabels,
   paddingTable,
   gapRow,
   gapColumn,
@@ -246,6 +244,422 @@ const EditField = ({
 
 /***/ }),
 
+/***/ "./src/components/panels/CreateFormPanel.js":
+/*!**************************************************!*\
+  !*** ./src/components/panels/CreateFormPanel.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _PanelEdit_EditField__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../PanelEdit/EditField */ "./src/components/PanelEdit/EditField.jsx");
+
+
+
+
+const CreateFormPanel = ({
+  attributes,
+  setAttributes
+}) => {
+  const [fieldLabel, setFieldLabel] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("");
+  const [fieldType, setFieldType] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("text");
+  const [options, setOptions] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("");
+  const [addInNewLine, setAddInNewLine] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+  const handleChange = (value, rowIndex, index) => {
+    const newFields = [...attributes.fields];
+    newFields[rowIndex][index].label = value;
+    setAttributes({
+      fields: newFields
+    });
+  };
+  const handleFieldChangeType = (value, rowIndex, index) => {
+    const newFields = [...attributes.fields];
+    newFields[rowIndex][index].type = value;
+    setAttributes({
+      fields: newFields
+    });
+  };
+  const removeField = (rowIndex, index) => {
+    const newFields = [...attributes.fields];
+    newFields[rowIndex].splice(index, 1);
+    if (newFields[rowIndex].length === 0) {
+      newFields.splice(rowIndex, 1);
+    }
+    setAttributes({
+      fields: newFields
+    });
+  };
+  const addField = () => {
+    const newField = {
+      label: fieldLabel,
+      type: fieldType
+    };
+    if (fieldType === "select") {
+      newField.options = options.split(",").map(opt => opt.trim());
+    }
+    if (addInNewLine) {
+      setAttributes({
+        fields: [...attributes.fields, [newField]]
+      });
+    } else {
+      const updatedFields = [...attributes.fields];
+      updatedFields[updatedFields.length - 1].push(newField);
+      setAttributes({
+        fields: updatedFields
+      });
+    }
+    setFieldLabel("");
+    setFieldType("text");
+    setOptions("");
+  };
+  const handleOptionsChange = (value, rowIndex, index) => {
+    const newFields = [...attributes.fields];
+    newFields[rowIndex][index].options = value.split(",").map(opt => opt.trim());
+    setAttributes({
+      fields: newFields
+    });
+  };
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelBody, {
+    title: "CREATE FORM",
+    className: "panelBody"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, {
+    className: "titleRow"
+  }, "Create Title"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    label: "Set Title",
+    value: attributes.formTitle,
+    onChange: value => setAttributes({
+      formTitle: value
+    })
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, {
+    className: "titleRow"
+  }, "Edit / Delete Fields"), attributes.fields.map((row, rowIndex) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    key: rowIndex,
+    style: {
+      marginBottom: "10px"
+    }
+  }, Array.isArray(row) ? row.map((field, index) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_PanelEdit_EditField__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    field: field,
+    index: index,
+    handleChange: handleChange,
+    handleFieldChangeType: handleFieldChangeType,
+    removeField: removeField,
+    handleOptionsChange: handleOptionsChange,
+    rowIndex: rowIndex,
+    isLast: index === attributes.fields.length - 1
+  })) : null)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, {
+    className: "titleRow"
+  }, "Create Fields"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    label: "New Field",
+    value: fieldLabel,
+    onChange: value => setFieldLabel(value)
+  }), fieldLabel !== "" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
+    label: "Field Type",
+    value: fieldType,
+    options: [{
+      label: "Text",
+      value: "text"
+    }, {
+      label: "Email",
+      value: "email"
+    }, {
+      label: "Number",
+      value: "number"
+    }, {
+      label: "Select",
+      value: "select"
+    }],
+    onChange: value => setFieldType(value)
+  }), fieldType === "select" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    help: "Instructions: (comma separated)",
+    label: "Options ",
+    value: options,
+    onChange: value => setOptions(value)
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.CheckboxControl, {
+    label: "Add in new line",
+    checked: addInNewLine,
+    onChange: isChecked => setAddInNewLine(isChecked)
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
+    variant: "primary",
+    icon: "plus",
+    isBusy: "true",
+    onClick: addField,
+    className: "btn"
+  }, "Add Field"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, {
+    className: "titleRow"
+  }, "Create Button Submit"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    label: "Set Title Button ex. Submit",
+    value: attributes.btnTitle,
+    onChange: value => setAttributes({
+      btnTitle: value
+    })
+  }));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CreateFormPanel);
+
+/***/ }),
+
+/***/ "./src/components/panels/SchemaFormPanel.js":
+/*!**************************************************!*\
+  !*** ./src/components/panels/SchemaFormPanel.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
+
+
+
+
+
+const SchemaFormPanel = ({
+  attributes,
+  setAttributes
+}) => {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelBody, {
+    title: "SCHEMA FORM",
+    initialOpen: false,
+    className: "panelBody"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, {
+    className: "titleRow"
+  }, "Set Background Color"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ColorPicker, {
+    color: attributes.colorBgTable,
+    onChange: value => {
+      setAttributes({
+        colorBgTable: value
+      });
+    },
+    enableAlpha: true,
+    defaultValue: "#000"
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, {
+    className: "titleRow"
+  }, "Set Title Color"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ColorPicker, {
+    color: attributes.colorTitle,
+    onChange: value => {
+      setAttributes({
+        colorTitle: value
+      });
+    },
+    enableAlpha: true,
+    defaultValue: "#000"
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, {
+    className: "titleRow"
+  }, "Set Text Color Button"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ColorPicker, {
+    color: attributes.colorTextButton,
+    onChange: value => {
+      setAttributes({
+        colorTextButton: value
+      });
+    },
+    enableAlpha: true,
+    defaultValue: "#000"
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, {
+    className: "titleRow"
+  }, "Set Background Color Button"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ColorPicker, {
+    color: attributes.colorBgButton,
+    onChange: value => {
+      setAttributes({
+        colorBgButton: value
+      });
+    },
+    enableAlpha: true,
+    defaultValue: "#000"
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, {
+    className: "titleRow"
+  }, "Set Hover Background Color Button"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ColorPicker, {
+    color: attributes.hoverColorBgButton,
+    onChange: value => {
+      setAttributes({
+        hoverColorBgButton: value
+      });
+    },
+    enableAlpha: true,
+    defaultValue: "#000"
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, {
+    className: "titleRow"
+  }, "Set Hover Text Color Button"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ColorPicker, {
+    color: attributes.hoverColorTextButton,
+    onChange: value => {
+      setAttributes({
+        hoverColorTextButton: value
+      });
+    },
+    enableAlpha: true,
+    defaultValue: "#000"
+  }));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SchemaFormPanel);
+
+/***/ }),
+
+/***/ "./src/components/panels/SettingsFormPanel.js":
+/*!****************************************************!*\
+  !*** ./src/components/panels/SettingsFormPanel.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
+
+
+
+const SettingsFormPanel = ({
+  attributes,
+  setAttributes
+}) => {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelBody, {
+    title: "SETTINGS FORM",
+    initialOpen: false,
+    className: "panelBody"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, {
+    className: "titleRow"
+  }, "Setting Form"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.RangeControl, {
+    label: "Padding Table",
+    value: attributes.paddingTable,
+    onChange: value => setAttributes({
+      paddingTable: value
+    }),
+    min: 2,
+    max: 150
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.RangeControl, {
+    label: "Gap Row Fields",
+    value: attributes.gapRow,
+    onChange: value => setAttributes({
+      gapRow: value
+    }),
+    min: 2,
+    max: 150
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.RangeControl, {
+    label: "Gap Column Fields",
+    value: attributes.gapColumn,
+    onChange: value => setAttributes({
+      gapColumn: value
+    }),
+    min: 2,
+    max: 150
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, {
+    className: "titleRow"
+  }, "Setting Title"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.RangeControl, {
+    label: "Font Size title",
+    value: attributes.fontSizeTitle,
+    onChange: newFontSize => {
+      setAttributes({
+        fontSizeTitle: newFontSize
+      });
+    },
+    min: 2,
+    max: 150
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.CheckboxControl, {
+    label: "Left",
+    checked: attributes.alignment === "start",
+    onChange: isChecked => isChecked && setAttributes({
+      alignment: "start"
+    })
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.CheckboxControl, {
+    label: "Center",
+    checked: attributes.alignment === "center",
+    onChange: isChecked => isChecked && setAttributes({
+      alignment: "center"
+    })
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.CheckboxControl, {
+    label: "Right",
+    checked: attributes.alignment === "end",
+    onChange: isChecked => isChecked && setAttributes({
+      alignment: "end"
+    })
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.RangeControl, {
+    label: "Set Margin Bottom",
+    value: attributes.marginBottomTitle,
+    onChange: value => {
+      setAttributes({
+        marginBottomTitle: value
+      });
+    },
+    min: 2,
+    max: 150
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, {
+    className: "titleRow"
+  }, "Setting Button"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.RangeControl, {
+    label: "Padding Inline Button",
+    value: attributes.paddingInlineButton,
+    onChange: value => {
+      setAttributes({
+        paddingInlineButton: value
+      });
+    },
+    min: 2,
+    max: 150
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.RangeControl, {
+    label: "Padding Block Button",
+    value: attributes.paddingBlockButton,
+    onChange: value => {
+      setAttributes({
+        paddingBlockButton: value
+      });
+    },
+    min: 2,
+    max: 150
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.RangeControl, {
+    label: "Size Text Button",
+    value: attributes.sizeTextButton,
+    onChange: value => {
+      setAttributes({
+        sizeTextButton: value
+      });
+    },
+    min: 2,
+    max: 150
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.CheckboxControl, {
+    label: "Left",
+    checked: attributes.alignmentBtn === "start",
+    onChange: isChecked => isChecked && setAttributes({
+      alignmentBtn: "start"
+    })
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.CheckboxControl, {
+    label: "Center",
+    checked: attributes.alignmentBtn === "center",
+    onChange: isChecked => isChecked && setAttributes({
+      alignmentBtn: "center"
+    })
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.CheckboxControl, {
+    label: "Right",
+    checked: attributes.alignmentBtn === "end",
+    onChange: isChecked => isChecked && setAttributes({
+      alignmentBtn: "end"
+    })
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.RangeControl, {
+    label: "Set Margin Top",
+    value: attributes.marginTopBtn,
+    onChange: value => {
+      setAttributes({
+        marginTopBtn: value
+      });
+    },
+    min: 2,
+    max: 150
+  }));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SettingsFormPanel);
+
+/***/ }),
+
 /***/ "./src/edit.jsx":
 /*!**********************!*\
   !*** ./src/edit.jsx ***!
@@ -266,9 +680,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _components_Form_Form__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Form/Form */ "./src/components/Form/Form.js");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _components_PanelEdit_EditField__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/PanelEdit/EditField */ "./src/components/PanelEdit/EditField.jsx");
+/* harmony import */ var _components_panels_CreateFormPanel__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/panels/CreateFormPanel */ "./src/components/panels/CreateFormPanel.js");
+/* harmony import */ var _components_panels_SettingsFormPanel__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/panels/SettingsFormPanel */ "./src/components/panels/SettingsFormPanel.js");
+/* harmony import */ var _components_panels_SchemaFormPanel__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/panels/SchemaFormPanel */ "./src/components/panels/SchemaFormPanel.js");
 
 /**
  * Retrieves the translation of text.
@@ -306,12 +720,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 const Edit = props => {
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)();
-  const [fieldLabel, setFieldLabel] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)("");
-  const [fieldType, setFieldType] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)("text");
-  const [options, setOptions] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)("");
-  const [addInNewLine, setAddInNewLine] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)(false);
   const {
     attributes: {
       formTitle,
@@ -324,8 +735,6 @@ const Edit = props => {
       titleCost,
       fontSizeTitle,
       colorTitle,
-      fontSizeLabels,
-      colorLabels,
       paddingTable,
       gapRow,
       gapColumn,
@@ -344,60 +753,6 @@ const Edit = props => {
     },
     setAttributes
   } = props;
-  const addField = () => {
-    const newField = {
-      label: fieldLabel,
-      type: fieldType
-    };
-    if (fieldType === "select") {
-      newField.options = options.split(",").map(opt => opt.trim());
-    }
-    if (addInNewLine) {
-      setAttributes({
-        fields: [...fields, [newField]]
-      });
-    } else {
-      const updatedFields = [...fields];
-      updatedFields[updatedFields.length - 1].push(newField);
-      setAttributes({
-        fields: updatedFields
-      });
-    }
-    setFieldLabel("");
-    setFieldType("text");
-    setOptions("");
-  };
-  const removeField = (rowIndex, index) => {
-    const newFields = [...fields];
-    newFields[rowIndex].splice(index, 1);
-    if (newFields[rowIndex].length === 0) {
-      newFields.splice(rowIndex, 1);
-    }
-    setAttributes({
-      fields: newFields
-    });
-  };
-  const handleChange = (value, rowIndex, index) => {
-    const newFields = [...fields];
-    newFields[rowIndex][index].label = value;
-    setAttributes({
-      fields: newFields
-    });
-  };
-  const handleFieldChangeType = (value, rowIndex, index) => {
-    const newFields = [...fields];
-    newFields[rowIndex][index].type = value;
-    setAttributes({
-      fields: newFields
-    });
-  };
-  const handleOptionsChange = (value, rowIndex, index) => {
-    const newFields = [...fields];
-    newFields[rowIndex][index].options = value.split(",").map(opt => opt.trim());
-    setAttributes({
-      fields: newFields
-    });
-  };
   const handleServiceOptionsChange = value => {
     setAttributes({
       labelOptions: value
@@ -407,333 +762,16 @@ const Edit = props => {
     ...blockProps
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, {
     key: "Setting"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
-    title: "CREATE FORM",
-    className: "panelBody"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelRow, {
-    className: "titleRow"
-  }, "Create Title"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.TextControl, {
-    label: "Set Title",
-    value: formTitle,
-    onChange: value => setAttributes({
-      formTitle: value
-    })
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelRow, {
-    className: "titleRow"
-  }, "Edit / Delete Fields"), fields.map((row, rowIndex) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    key: rowIndex,
-    style: {
-      marginBottom: "10px"
-    }
-  }, Array.isArray(row) ? row.map((field, index) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_PanelEdit_EditField__WEBPACK_IMPORTED_MODULE_7__["default"], {
-    field: field,
-    index: index,
-    handleChange: handleChange,
-    handleFieldChangeType: handleFieldChangeType,
-    removeField: removeField,
-    handleOptionsChange: handleOptionsChange,
-    rowIndex: rowIndex,
-    isLast: index === fields.length - 1
-  })) : null)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelRow, {
-    className: "titleRow"
-  }, "Create Fields"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.TextControl, {
-    label: "New Field",
-    value: fieldLabel,
-    onChange: value => setFieldLabel(value)
-  }), fieldLabel !== "" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.SelectControl, {
-    label: "Field Type",
-    value: fieldType,
-    options: [{
-      label: "Text",
-      value: "text"
-    }, {
-      label: "Email",
-      value: "email"
-    }, {
-      label: "Number",
-      value: "number"
-    }, {
-      label: "Select",
-      value: "select"
-    }],
-    onChange: value => setFieldType(value)
-  }), fieldType === "select" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.TextControl, {
-    help: "Instructions: (comma separated)",
-    label: "Options ",
-    value: options,
-    onChange: value => setOptions(value)
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.CheckboxControl, {
-    label: "Add in new line",
-    checked: addInNewLine,
-    onChange: isChecked => setAddInNewLine(isChecked)
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Button, {
-    variant: "primary",
-    icon: "plus",
-    isBusy: "true",
-    onClick: addField,
-    className: "btn"
-  }, "Add Field"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelRow, {
-    className: "titleRow"
-  }, "Create Button Submit"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.TextControl, {
-    label: "Set Title Button ex. Submit",
-    value: btnTitle,
-    onChange: value => setAttributes({
-      btnTitle: value
-    })
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
-    title: "SCHEMA SETTINGS",
-    initialOpen: false,
-    className: "panelBody"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelRow, {
-    className: "titleRow"
-  }, "Setting Table"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.RangeControl, {
-    label: "Padding Table",
-    value: paddingTable,
-    onChange: value => setAttributes({
-      paddingTable: value
-    }),
-    min: 2,
-    max: 150
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.RangeControl, {
-    label: "Gap Row Fields",
-    value: gapRow,
-    onChange: value => setAttributes({
-      gapRow: value
-    }),
-    min: 2,
-    max: 150
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.RangeControl, {
-    label: "Gap Column Fields",
-    value: gapColumn,
-    onChange: value => setAttributes({
-      gapColumn: value
-    }),
-    min: 2,
-    max: 150
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
-    style: {
-      marginBottom: "10px",
-      display: "block"
-    }
-  }, "Set Background Color"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ColorPicker, {
-    color: colorBgTable,
-    onChange: value => {
-      setAttributes({
-        colorBgTable: value
-      });
-    },
-    enableAlpha: true,
-    defaultValue: "#000"
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelRow, {
-    className: "titleRow"
-  }, "Schema Title"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.RangeControl, {
-    label: "Font Size title",
-    value: fontSizeTitle,
-    onChange: newFontSize => {
-      setAttributes({
-        fontSizeTitle: newFontSize
-      });
-    },
-    min: 2,
-    max: 150
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.CheckboxControl, {
-    label: "Left",
-    checked: alignment === "start",
-    onChange: isChecked => isChecked && setAttributes({
-      alignment: "start"
-    })
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.CheckboxControl, {
-    label: "Center",
-    checked: alignment === "center",
-    onChange: isChecked => isChecked && setAttributes({
-      alignment: "center"
-    })
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.CheckboxControl, {
-    label: "Right",
-    checked: alignment === "end",
-    onChange: isChecked => isChecked && setAttributes({
-      alignment: "end"
-    })
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ColorPalette, {
-    colors: [{
-      name: "red",
-      color: "#f00"
-    }, {
-      name: "white",
-      color: "#fff"
-    }, {
-      name: "blue",
-      color: "#00f"
-    }],
-    value: colorTitle,
-    onChange: color => setAttributes({
-      colorTitle: color
-    })
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.RangeControl, {
-    label: "Set Margin Bottom",
-    value: marginBottomTitle,
-    onChange: value => {
-      setAttributes({
-        marginBottomTitle: value
-      });
-    },
-    min: 2,
-    max: 150
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelRow, {
-    className: "titleRow"
-  }, "Schema Label"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.FontSizePicker, {
-    fontSizes: [{
-      name: "Small",
-      slug: "small",
-      size: 12
-    }, {
-      name: "Medium",
-      slug: "medium",
-      size: 26
-    }, {
-      name: "Big",
-      slug: "big",
-      size: 44
-    }],
-    value: fontSizeLabels,
-    fallbackFontSize: 16,
-    onChange: newFontSize => {
-      setAttributes({
-        fontSizeLabels: newFontSize
-      });
-    }
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ColorPalette, {
-    colors: [{
-      name: "red",
-      color: "#f00"
-    }, {
-      name: "white",
-      color: "#fff"
-    }, {
-      name: "blue",
-      color: "#00f"
-    }],
-    value: colorLabels,
-    onChange: color => setAttributes({
-      colorLabels: color
-    })
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelRow, {
-    className: "titleRow"
-  }, "Schema Button"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.RangeControl, {
-    label: "Padding Inline Button",
-    value: paddingInlineButton,
-    onChange: value => {
-      setAttributes({
-        paddingInlineButton: value
-      });
-    },
-    min: 2,
-    max: 150
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.RangeControl, {
-    label: "Padding Block Button",
-    value: paddingBlockButton,
-    onChange: value => {
-      setAttributes({
-        paddingBlockButton: value
-      });
-    },
-    min: 2,
-    max: 150
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.RangeControl, {
-    label: "Size Text Button",
-    value: sizeTextButton,
-    onChange: value => {
-      setAttributes({
-        sizeTextButton: value
-      });
-    },
-    min: 2,
-    max: 150
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.CheckboxControl, {
-    label: "Left",
-    checked: alignmentBtn === "start",
-    onChange: isChecked => isChecked && setAttributes({
-      alignmentBtn: "start"
-    })
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.CheckboxControl, {
-    label: "Center",
-    checked: alignmentBtn === "center",
-    onChange: isChecked => isChecked && setAttributes({
-      alignmentBtn: "center"
-    })
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.CheckboxControl, {
-    label: "Right",
-    checked: alignmentBtn === "end",
-    onChange: isChecked => isChecked && setAttributes({
-      alignmentBtn: "end"
-    })
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.RangeControl, {
-    label: "Set Margin Top",
-    value: marginTopBtn,
-    onChange: value => {
-      setAttributes({
-        marginTopBtn: value
-      });
-    },
-    min: 2,
-    max: 150
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
-    style: {
-      marginBottom: "10px",
-      display: "block"
-    }
-  }, "Set Text Color Button"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ColorPicker, {
-    color: colorTextButton,
-    onChange: value => {
-      setAttributes({
-        colorTextButton: value
-      });
-    },
-    enableAlpha: true,
-    defaultValue: "#000"
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
-    style: {
-      marginBottom: "10px",
-      display: "block"
-    }
-  }, "Set Background Color Button"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ColorPicker, {
-    color: colorBgButton,
-    onChange: value => {
-      setAttributes({
-        colorBgButton: value
-      });
-    },
-    enableAlpha: true,
-    defaultValue: "#000"
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
-    style: {
-      marginBottom: "10px",
-      display: "block"
-    }
-  }, "Set Hover Background Color Button"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ColorPicker, {
-    color: hoverColorBgButton,
-    onChange: value => {
-      setAttributes({
-        hoverColorBgButton: value
-      });
-    },
-    enableAlpha: true,
-    defaultValue: "#000"
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
-    style: {
-      marginBottom: "10px",
-      display: "block"
-    }
-  }, "Set Hover Text Color Button"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ColorPicker, {
-    color: hoverColorTextButton,
-    onChange: value => {
-      setAttributes({
-        hoverColorTextButton: value
-      });
-    },
-    enableAlpha: true,
-    defaultValue: "#000"
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_panels_CreateFormPanel__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    attributes: props.attributes,
+    setAttributes: props.setAttributes
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_panels_SettingsFormPanel__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    attributes: props.attributes,
+    setAttributes: props.setAttributes
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_panels_SchemaFormPanel__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    attributes: props.attributes,
+    setAttributes: props.setAttributes
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
     title: "PayU Payment Settings",
     initialOpen: false
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.CheckboxControl, {
@@ -780,8 +818,6 @@ const Edit = props => {
     titleCost: titleCost,
     fontSizeTitle: fontSizeTitle,
     colorTitle: colorTitle,
-    fontSizeLabels: fontSizeLabels,
-    colorLabels: colorLabels,
     paddingTable: paddingTable,
     gapRow: gapRow,
     gapColumn: gapColumn,
@@ -1152,16 +1188,6 @@ module.exports = window["wp"]["blocks"];
 /***/ ((module) => {
 
 module.exports = window["wp"]["components"];
-
-/***/ }),
-
-/***/ "@wordpress/element":
-/*!*********************************!*\
-  !*** external ["wp","element"] ***!
-  \*********************************/
-/***/ ((module) => {
-
-module.exports = window["wp"]["element"];
 
 /***/ }),
 
