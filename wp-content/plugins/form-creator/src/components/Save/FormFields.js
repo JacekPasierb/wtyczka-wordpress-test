@@ -51,6 +51,8 @@ const FormFields = ({ attributes }) => {
 						flexDirection: "row",
 						gap: `${attributes.gapRow}px`,
 						alignItems: "center",
+						"--colorLabel": `${attributes.colorLabel}`,
+						"--sizeLabel": `${attributes.fontSizeLabel}px`,
 					}}
 					className="form-row"
 				>

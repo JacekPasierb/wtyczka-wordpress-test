@@ -100,7 +100,7 @@
 	font-size: var(--sizeLabel) !important;
 	text-transform: none !important;
 	margin-bottom: 5px;
-	color: var(--colorLabel) ;
+	color: var(--colorLabel);
 }
 .components-select-control {
 	gap: 0 !important;
@@ -134,5 +134,4 @@ select {
 	background-color: var(--hover-bg-color) !important;
 	color: var(--hover-text-color) !important;
 }
-
 

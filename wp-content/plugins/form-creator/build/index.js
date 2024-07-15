@@ -823,7 +823,9 @@ const FormFields = ({
       display: "flex",
       flexDirection: "row",
       gap: `${attributes.gapRow}px`,
-      alignItems: "center"
+      alignItems: "center",
+      "--colorLabel": `${attributes.colorLabel}`,
+      "--sizeLabel": `${attributes.fontSizeLabel}px`
     },
     className: "form-row"
   }, Array.isArray(row) ? row.map((field, index) => renderField(field, rowIndex, index)) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Error: Row is not an array"))));
@@ -858,7 +860,9 @@ const PayuSection = ({
       display: "flex",
       flexDirection: "row",
       gap: "20px",
-      alignItems: "flex-end"
+      alignItems: "flex-end",
+      "--colorLabel": `${attributes.colorLabel}`,
+      "--sizeLabel": `${attributes.fontSizeLabel}px`
     },
     className: "payu-section"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -885,7 +889,9 @@ const PayuSection = ({
       marginBottom: "10px",
       display: "flex",
       flexDirection: "row",
-      gap: "10px"
+      gap: "10px",
+      "--colorLabel": `${attributes.colorLabel}`,
+      "--sizeLabel": `${attributes.fontSizeLabel}px`
     },
     className: "payu-fields"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {

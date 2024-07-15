@@ -13,6 +13,8 @@ const PayuSection = ({ attributes }) => {
 					flexDirection: "row",
 					gap: "20px",
 					alignItems: "flex-end",
+					"--colorLabel": `${attributes.colorLabel}`,
+					"--sizeLabel": `${attributes.fontSizeLabel}px`,
 				}}
 				className="payu-section"
 			>
@@ -46,6 +48,8 @@ const PayuSection = ({ attributes }) => {
 					display: "flex",
 					flexDirection: "row",
 					gap: "10px",
+					"--colorLabel": `${attributes.colorLabel}`,
+					"--sizeLabel": `${attributes.fontSizeLabel}px`,
 				}}
 				className="payu-fields"
 			>
