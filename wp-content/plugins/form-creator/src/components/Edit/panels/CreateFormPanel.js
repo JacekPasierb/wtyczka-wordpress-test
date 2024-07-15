@@ -8,7 +8,7 @@ import {
 } from "@wordpress/components";
 
 import React, { useState } from "react";
-import EditField from "../EditFields/EditField";
+import EditField from "../EditField";
 
 const CreateFormPanel = ({ attributes, setAttributes }) => {
 	const [fieldLabel, setFieldLabel] = useState("");

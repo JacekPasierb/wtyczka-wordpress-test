@@ -40,12 +40,12 @@ import {
  * @return {Element} Element to render.
  */
 
-import Form from "./components/Form/Form";
-import CreateFormPanel from "./components/panels/CreateFormPanel";
-import SettingsFormPanel from "./components/panels/SettingsFormPanel";
-import SchemaFormPanel from "./components/panels/SchemaFormPanel";
-import OptionFormPanel from "./components/panels/OptionFormPanel";
-import PayuPaymentPanel from "./components/panels/PayuPaymentPanel";
+import Form from "./components/Edit/Form";
+import CreateFormPanel from "./components/Edit/panels/CreateFormPanel";
+import SettingsFormPanel from "./components/Edit/panels/SettingsFormPanel";
+import SchemaFormPanel from "./components/Edit/panels/SchemaFormPanel";
+import OptionFormPanel from "./components/Edit/panels/OptionFormPanel";
+import PayuPaymentPanel from "./components/Edit/panels/PayuPaymentPanel";
 
 const Edit = (props) => {
 	const blockProps = useBlockProps();

@@ -2,10 +2,10 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./src/components/EditFields/EditField.jsx":
-/*!*************************************************!*\
-  !*** ./src/components/EditFields/EditField.jsx ***!
-  \*************************************************/
+/***/ "./src/components/Edit/EditField.jsx":
+/*!*******************************************!*\
+  !*** ./src/components/Edit/EditField.jsx ***!
+  \*******************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -79,9 +79,9 @@ const EditField = ({
 
 /***/ }),
 
-/***/ "./src/components/Form/Form.js":
+/***/ "./src/components/Edit/Form.js":
 /*!*************************************!*\
-  !*** ./src/components/Form/Form.js ***!
+  !*** ./src/components/Edit/Form.js ***!
   \*************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -220,10 +220,10 @@ const Form = ({
 
 /***/ }),
 
-/***/ "./src/components/panels/CreateFormPanel.js":
-/*!**************************************************!*\
-  !*** ./src/components/panels/CreateFormPanel.js ***!
-  \**************************************************/
+/***/ "./src/components/Edit/panels/CreateFormPanel.js":
+/*!*******************************************************!*\
+  !*** ./src/components/Edit/panels/CreateFormPanel.js ***!
+  \*******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -234,7 +234,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _EditFields_EditField__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../EditFields/EditField */ "./src/components/EditFields/EditField.jsx");
+/* harmony import */ var _EditField__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../EditField */ "./src/components/Edit/EditField.jsx");
 
 
 
@@ -319,7 +319,7 @@ const CreateFormPanel = ({
     style: {
       marginBottom: "10px"
     }
-  }, Array.isArray(row) ? row.map((field, index) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_EditFields_EditField__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }, Array.isArray(row) ? row.map((field, index) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_EditField__WEBPACK_IMPORTED_MODULE_2__["default"], {
     field: field,
     index: index,
     handleChange: handleChange,
@@ -380,10 +380,10 @@ const CreateFormPanel = ({
 
 /***/ }),
 
-/***/ "./src/components/panels/OptionFormPanel.js":
-/*!**************************************************!*\
-  !*** ./src/components/panels/OptionFormPanel.js ***!
-  \**************************************************/
+/***/ "./src/components/Edit/panels/OptionFormPanel.js":
+/*!*******************************************************!*\
+  !*** ./src/components/Edit/panels/OptionFormPanel.js ***!
+  \*******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -417,10 +417,10 @@ const OptionFormPanel = ({
 
 /***/ }),
 
-/***/ "./src/components/panels/PayuPaymentPanel.js":
-/*!***************************************************!*\
-  !*** ./src/components/panels/PayuPaymentPanel.js ***!
-  \***************************************************/
+/***/ "./src/components/Edit/panels/PayuPaymentPanel.js":
+/*!********************************************************!*\
+  !*** ./src/components/Edit/panels/PayuPaymentPanel.js ***!
+  \********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -478,10 +478,10 @@ const PayuPaymentPanel = ({
 
 /***/ }),
 
-/***/ "./src/components/panels/SchemaFormPanel.js":
-/*!**************************************************!*\
-  !*** ./src/components/panels/SchemaFormPanel.js ***!
-  \**************************************************/
+/***/ "./src/components/Edit/panels/SchemaFormPanel.js":
+/*!*******************************************************!*\
+  !*** ./src/components/Edit/panels/SchemaFormPanel.js ***!
+  \*******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -575,10 +575,10 @@ const SchemaFormPanel = ({
 
 /***/ }),
 
-/***/ "./src/components/panels/SettingsFormPanel.js":
-/*!****************************************************!*\
-  !*** ./src/components/panels/SettingsFormPanel.js ***!
-  \****************************************************/
+/***/ "./src/components/Edit/panels/SettingsFormPanel.js":
+/*!*********************************************************!*\
+  !*** ./src/components/Edit/panels/SettingsFormPanel.js ***!
+  \*********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -732,6 +732,199 @@ const SettingsFormPanel = ({
 
 /***/ }),
 
+/***/ "./src/components/Save/FormFields.js":
+/*!*******************************************!*\
+  !*** ./src/components/Save/FormFields.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+const FormFields = ({
+  attributes
+}) => {
+  const renderField = (field, rowIndex, index) => {
+    return field.type === "select" ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      key: index,
+      style: {
+        display: "flex",
+        flexDirection: "column"
+      },
+      className: "form-control"
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+      for: `sel` + rowIndex + index
+    }, field.label), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
+      id: `sel` + rowIndex + index,
+      name: `sel` + rowIndex + index
+    }, field.options.map((option, optionIndex) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+      key: optionIndex,
+      value: option
+    }, option)))) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      key: index,
+      style: {
+        display: "flex",
+        flexDirection: "column"
+      },
+      className: "form-control"
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+      for: `inp` + rowIndex + index
+    }, field.label), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+      type: field.type,
+      id: `inp` + rowIndex + index,
+      name: `inp` + rowIndex + index
+    }));
+  };
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    style: {
+      display: "flex",
+      flexDirection: "column",
+      gap: `${attributes.gapColumn}px`
+    },
+    className: "form-fields"
+  }, attributes.fields.map((row, rowIndex) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    key: rowIndex,
+    style: {
+      marginBottom: "10px",
+      display: "flex",
+      flexDirection: "row",
+      gap: `${attributes.gapRow}px`,
+      alignItems: "center"
+    },
+    className: "form-row"
+  }, Array.isArray(row) ? row.map((field, index) => renderField(field, rowIndex, index)) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Error: Row is not an array"))));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FormFields);
+
+/***/ }),
+
+/***/ "./src/components/Save/PayuSection.js":
+/*!********************************************!*\
+  !*** ./src/components/Save/PayuSection.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+const PayuSection = ({
+  attributes
+}) => {
+  const optionsArray = attributes.labelOptions.split(",").map(option => option.split(":")).map(([label, value]) => ({
+    label,
+    value
+  }));
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    style: {
+      display: "flex",
+      flexDirection: "row",
+      gap: "20px",
+      alignItems: "flex-end"
+    },
+    className: "payu-section"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    style: {
+      display: "flex",
+      flexDirection: "column"
+    },
+    className: "form-control"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    htmlFor: "service_select"
+  }, attributes.labelService), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
+    id: "service_select",
+    name: "service_select",
+    onChange: "document.getElementById('dynamic-cost').textContent = this.value + ' ' +  'pln';"
+  }, optionsArray.map((option, index) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+    key: index,
+    value: option.value
+  }, option.label)))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+    className: "service-cost"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("strong", null, attributes.titleCost, ":"), " ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    id: "dynamic-cost"
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", null, "Steps 2"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, attributes.titleFormPayU), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    style: {
+      marginBottom: "10px",
+      display: "flex",
+      flexDirection: "row",
+      gap: "10px"
+    },
+    className: "payu-fields"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    style: {
+      display: "flex",
+      flexDirection: "column"
+    },
+    className: "form-control"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    for: "buyer_first_name"
+  }, "First Name"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+    type: "text",
+    name: "buyer_first_name",
+    id: "buyer_first_name"
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    style: {
+      display: "flex",
+      flexDirection: "column"
+    },
+    className: "form-control"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    for: "buyer_last_name"
+  }, "Last Name"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+    type: "text",
+    name: "buyer_last_name",
+    id: "buyer_last_name"
+  }))));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PayuSection);
+
+/***/ }),
+
+/***/ "./src/components/Save/SubmitButton.js":
+/*!*********************************************!*\
+  !*** ./src/components/Save/SubmitButton.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+const SubmitButton = ({
+  attributes
+}) => {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+    style: {
+      paddingInline: `${attributes.paddingInlineButton}px`,
+      paddingBlock: `${attributes.paddingBlockButton}px`,
+      fontSize: `${attributes.sizeTextButton}px`,
+      color: `${attributes.colorTextButton}`,
+      backgroundColor: `${attributes.colorBgButton}`,
+      "--margin-top": `${attributes.marginTopBtn}px`,
+      "--hover-bg-color": `${attributes.hoverColorBgButton}`,
+      "--hover-text-button": `${attributes.hoverColorTextButton}`
+    },
+    type: "submit",
+    className: "button"
+  }, attributes.btnTitle);
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SubmitButton);
+
+/***/ }),
+
 /***/ "./src/edit.jsx":
 /*!**********************!*\
   !*** ./src/edit.jsx ***!
@@ -751,12 +944,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./editor.scss */ "./src/editor.scss");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _components_Form_Form__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Form/Form */ "./src/components/Form/Form.js");
-/* harmony import */ var _components_panels_CreateFormPanel__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/panels/CreateFormPanel */ "./src/components/panels/CreateFormPanel.js");
-/* harmony import */ var _components_panels_SettingsFormPanel__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/panels/SettingsFormPanel */ "./src/components/panels/SettingsFormPanel.js");
-/* harmony import */ var _components_panels_SchemaFormPanel__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/panels/SchemaFormPanel */ "./src/components/panels/SchemaFormPanel.js");
-/* harmony import */ var _components_panels_OptionFormPanel__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/panels/OptionFormPanel */ "./src/components/panels/OptionFormPanel.js");
-/* harmony import */ var _components_panels_PayuPaymentPanel__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/panels/PayuPaymentPanel */ "./src/components/panels/PayuPaymentPanel.js");
+/* harmony import */ var _components_Edit_Form__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Edit/Form */ "./src/components/Edit/Form.js");
+/* harmony import */ var _components_Edit_panels_CreateFormPanel__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Edit/panels/CreateFormPanel */ "./src/components/Edit/panels/CreateFormPanel.js");
+/* harmony import */ var _components_Edit_panels_SettingsFormPanel__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/Edit/panels/SettingsFormPanel */ "./src/components/Edit/panels/SettingsFormPanel.js");
+/* harmony import */ var _components_Edit_panels_SchemaFormPanel__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/Edit/panels/SchemaFormPanel */ "./src/components/Edit/panels/SchemaFormPanel.js");
+/* harmony import */ var _components_Edit_panels_OptionFormPanel__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/Edit/panels/OptionFormPanel */ "./src/components/Edit/panels/OptionFormPanel.js");
+/* harmony import */ var _components_Edit_panels_PayuPaymentPanel__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/Edit/panels/PayuPaymentPanel */ "./src/components/Edit/panels/PayuPaymentPanel.js");
 
 /**
  * Retrieves the translation of text.
@@ -809,22 +1002,22 @@ const Edit = props => {
     ...blockProps
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, {
     key: "Setting"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_panels_CreateFormPanel__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_Edit_panels_CreateFormPanel__WEBPACK_IMPORTED_MODULE_6__["default"], {
     attributes: props.attributes,
     setAttributes: props.setAttributes
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_panels_SettingsFormPanel__WEBPACK_IMPORTED_MODULE_7__["default"], {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_Edit_panels_SettingsFormPanel__WEBPACK_IMPORTED_MODULE_7__["default"], {
     attributes: props.attributes,
     setAttributes: props.setAttributes
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_panels_SchemaFormPanel__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_Edit_panels_SchemaFormPanel__WEBPACK_IMPORTED_MODULE_8__["default"], {
     attributes: props.attributes,
     setAttributes: props.setAttributes
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_panels_OptionFormPanel__WEBPACK_IMPORTED_MODULE_9__["default"], {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_Edit_panels_OptionFormPanel__WEBPACK_IMPORTED_MODULE_9__["default"], {
     attributes: props.attributes,
     setAttributes: props.setAttributes
-  }), enablePayU && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_panels_PayuPaymentPanel__WEBPACK_IMPORTED_MODULE_10__["default"], {
+  }), enablePayU && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_Edit_panels_PayuPaymentPanel__WEBPACK_IMPORTED_MODULE_10__["default"], {
     attributes: props.attributes,
     setAttributes: props.setAttributes
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_Form_Form__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_Edit_Form__WEBPACK_IMPORTED_MODULE_5__["default"], {
     attributes: props.attributes
   }));
 };
@@ -901,8 +1094,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _form_styles_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./form-styles.css */ "./src/form-styles.css");
-/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
-/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _components_Save_FormFields__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Save/FormFields */ "./src/components/Save/FormFields.js");
+/* harmony import */ var _components_Save_PayuSection__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/Save/PayuSection */ "./src/components/Save/PayuSection.js");
+/* harmony import */ var _components_Save_SubmitButton__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Save/SubmitButton */ "./src/components/Save/SubmitButton.js");
 
 /**
  * React hook that is used to mark the block wrapper element.
@@ -926,173 +1120,33 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 const save = ({
   attributes
 }) => {
-  const {
-    formTitle,
-    enablePayU,
-    fields,
-    btnTitle,
-    labelService,
-    labelOptions,
-    titleCost,
-    titleFormPayU,
-    fontSizeTitle,
-    colorTitle,
-    paddingTable,
-    gapColumn,
-    gapRow,
-    marginBottomTitle,
-    paddingInlineButton,
-    paddingBlockButton,
-    sizeTextButton,
-    colorTextButton,
-    colorBgButton,
-    hoverColorBgButton,
-    hoverColorTextButton,
-    marginTopBtn,
-    alignment,
-    colorBgTable
-  } = attributes;
-  const optionsArray = labelOptions.split(",").map(option => option.split(":")).map(([label, value]) => ({
-    label,
-    value
-  }));
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("form", {
     ..._wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save(),
-    id: enablePayU ? "your-form-id" : "other-form",
+    id: attributes.enablePayU ? "your-form-id" : "other-form",
     method: "post",
     style: {
-      padding: `${paddingTable}px`,
-      backgroundColor: `${colorBgTable}`
+      padding: `${attributes.paddingTable}px`,
+      backgroundColor: `${attributes.colorBgTable}`
     },
     className: "custom-form"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
     style: {
-      fontSize: `${fontSizeTitle}px`,
-      color: `${colorTitle}`,
-      marginBottom: `${marginBottomTitle}px`,
-      alignSelf: `${alignment}`
+      fontSize: `${attributes.fontSizeTitle}px`,
+      color: `${attributes.colorTitle}`,
+      marginBottom: `${attributes.marginBottomTitle}px`,
+      alignSelf: `${attributes.alignment}`
     }
-  }, formTitle), enablePayU && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", null, "Steps 1"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    style: {
-      display: "flex",
-      flexDirection: "column",
-      gap: `${gapColumn}px`
-    },
-    className: "form-fields"
-  }, fields.map((row, rowIndex) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    key: rowIndex,
-    style: {
-      marginBottom: "10px",
-      display: "flex",
-      flexDirection: "row",
-      gap: `${gapRow}px`,
-      alignItems: "center"
-    },
-    className: "form-row"
-  }, Array.isArray(row) ? row.map((field, index) => field.type === "select" ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    key: index,
-    style: {
-      display: "flex",
-      flexDirection: "column"
-    },
-    className: "form-control"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
-    for: `sel` + rowIndex + index
-  }, field.label), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
-    id: `sel` + rowIndex + index,
-    name: `sel` + rowIndex + index
-  }, field.options.map((option, optionIndex) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
-    key: optionIndex,
-    value: option
-  }, option)))) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    key: index,
-    style: {
-      display: "flex",
-      flexDirection: "column"
-    },
-    className: "form-control"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
-    for: `inp` + rowIndex + index
-  }, field.label), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
-    type: field.type,
-    id: `inp` + rowIndex + index,
-    name: `inp` + rowIndex + index
-  }))) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Error: Row is not an array")))), enablePayU && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    style: {
-      display: "flex",
-      flexDirection: "row",
-      gap: "20px",
-      alignItems: "flex-end"
-    },
-    className: "payu-section"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    style: {
-      display: "flex",
-      flexDirection: "column"
-    },
-    className: "form-control"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
-    htmlFor: "service_select"
-  }, labelService), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
-    id: "service_select",
-    name: "service_select",
-    onChange: "document.getElementById('dynamic-cost').textContent = this.value + ' ' +  'pln';"
-  }, optionsArray.map((option, index) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
-    key: index,
-    value: option.value
-  }, option.label)))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
-    className: "service-cost"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("strong", null, titleCost, ":"), " ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-    id: "dynamic-cost"
-  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", null, "Steps 2"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, titleFormPayU), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    style: {
-      marginBottom: "10px",
-      display: "flex",
-      flexDirection: "row",
-      gap: "10px"
-    },
-    className: "payu-fields"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    style: {
-      display: "flex",
-      flexDirection: "column"
-    },
-    className: "form-control"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
-    for: "buyer_first_name"
-  }, "First Name"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
-    type: "text",
-    name: "buyer_first_name",
-    id: "buyer_first_name"
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    style: {
-      display: "flex",
-      flexDirection: "column"
-    },
-    className: "form-control"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
-    for: "buyer_last_name"
-  }, "Last Name"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
-    type: "text",
-    name: "buyer_last_name",
-    id: "buyer_last_name"
-  })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
-    style: {
-      paddingInline: `${paddingInlineButton}px`,
-      paddingBlock: `${paddingBlockButton}px`,
-      fontSize: `${sizeTextButton}px`,
-      color: `${colorTextButton}`,
-      backgroundColor: `${colorBgButton}`,
-      "--margin-top": `${marginTopBtn}px`,
-      "--hover-bg-color": `${hoverColorBgButton}`,
-      "--hover-text-button": `${hoverColorTextButton}`
-    },
-    type: "submit",
-    className: "button"
-  }, "Submit"));
+  }, attributes.formTitle), attributes.enablePayU && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", null, "Steps 1"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_Save_FormFields__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    attributes: attributes
+  }), attributes.enablePayU && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_Save_PayuSection__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    attributes: attributes
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_Save_SubmitButton__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    attributes: attributes
+  }));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (save);
 
@@ -1141,16 +1195,6 @@ __webpack_require__.r(__webpack_exports__);
 /***/ ((module) => {
 
 module.exports = window["React"];
-
-/***/ }),
-
-/***/ "@wordpress/api-fetch":
-/*!**********************************!*\
-  !*** external ["wp","apiFetch"] ***!
-  \**********************************/
-/***/ ((module) => {
-
-module.exports = window["wp"]["apiFetch"];
 
 /***/ }),
 
