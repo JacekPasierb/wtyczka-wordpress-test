@@ -46,7 +46,10 @@
 	align-items: center;
 	background-color: #b7ff10;
 	padding: 20px;
-	border: 1px solid #ddd;
+	border: solid;
+	border-width: var(--borderWidth);
+
+	border-color:var(--borderColor) ;
 }
 
 .custom-form h1 {

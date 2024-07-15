@@ -32,6 +32,9 @@ const save = ({ attributes }) => {
 			style={{
 				padding: `${attributes.paddingTable}px`,
 				backgroundColor: `${attributes.colorBgTable}`,
+				borderRadius:`${attributes.borderRadiusTable}px`,
+				"--borderWidth": `${attributes.borderWidthTable}px`,
+				"--borderColor":`${attributes.borderColorTable}`,
 			}}
 			className="custom-form"
 		>

@@ -46,6 +46,16 @@ const CreateFormPanel = ({ attributes, setAttributes }) => {
 			setAttributes({ fields: [...attributes.fields, [newField]] });
 		} else {
 			const updatedFields = [...attributes.fields];
+
+			const numberOfRows = attributes.fields.length;
+			const lastRow = attributes.fields[numberOfRows - 1];
+			const numberOfFieldsInLastRow = lastRow.length;
+
+			if (numberOfFieldsInLastRow >= 5) {
+				alert("Too many fields in one row"); // dodac obsługe komunikatu
+				return;
+			}
+
 			updatedFields[updatedFields.length - 1].push(newField);
 			setAttributes({ fields: updatedFields });
 		}

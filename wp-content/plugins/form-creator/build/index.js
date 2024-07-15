@@ -128,7 +128,10 @@ const Form = ({
       display: "flex",
       flexDirection: "column",
       backgroundColor: `${attributes.colorBgTable}`,
-      padding: `${attributes.paddingTable}px`
+      padding: `${attributes.paddingTable}px`,
+      borderRadius: `${attributes.borderRadiusTable}px`,
+      "--borderWidth": `${attributes.borderWidthTable}px`,
+      "--borderColor": `${attributes.borderColorTable}`
     },
     className: "custom-form"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
@@ -291,6 +294,13 @@ const CreateFormPanel = ({
       });
     } else {
       const updatedFields = [...attributes.fields];
+      const numberOfRows = attributes.fields.length;
+      const lastRow = attributes.fields[numberOfRows - 1];
+      const numberOfFieldsInLastRow = lastRow.length;
+      if (numberOfFieldsInLastRow >= 5) {
+        alert("Too many fields in one row"); // dodac obsługe komunikatu
+        return;
+      }
       updatedFields[updatedFields.length - 1].push(newField);
       setAttributes({
         fields: updatedFields
@@ -522,6 +532,17 @@ const SchemaFormPanel = ({
     defaultValue: "#000"
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, {
     className: "titleRow"
+  }, "Set Border Color"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ColorPicker, {
+    color: attributes.borderColorTable,
+    onChange: value => {
+      setAttributes({
+        borderColorTable: value
+      });
+    },
+    enableAlpha: true,
+    defaultValue: "#000"
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, {
+    className: "titleRow"
   }, "Set Title Color"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ColorPicker, {
     color: attributes.colorTitle,
     onChange: value => {
@@ -620,6 +641,22 @@ const SettingsFormPanel = ({
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, {
     className: "titleRow"
   }, "Setting Form"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.RangeControl, {
+    label: "Border Radius Table",
+    value: attributes.borderRadiusTable,
+    onChange: value => setAttributes({
+      borderRadiusTable: value
+    }),
+    min: 2,
+    max: 150
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.RangeControl, {
+    label: "Border Width Table",
+    value: attributes.borderWidthTable,
+    onChange: value => setAttributes({
+      borderWidthTable: value
+    }),
+    min: 0,
+    max: 150
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.RangeControl, {
     label: "Padding Table",
     value: attributes.paddingTable,
     onChange: value => setAttributes({
@@ -1165,7 +1202,10 @@ const save = ({
     method: "post",
     style: {
       padding: `${attributes.paddingTable}px`,
-      backgroundColor: `${attributes.colorBgTable}`
+      backgroundColor: `${attributes.colorBgTable}`,
+      borderRadius: `${attributes.borderRadiusTable}px`,
+      "--borderWidth": `${attributes.borderWidthTable}px`,
+      "--borderColor": `${attributes.borderColorTable}`
     },
     className: "custom-form"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
@@ -1279,7 +1319,7 @@ module.exports = window["wp"]["i18n"];
   \************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/form-creator","version":"0.1.0","title":"Form Creator","category":"widgets","icon":"smiley","description":"Example block scaffolded with Create Block tool.","example":{},"attributes":{"formTitle":{"type":"string","default":"Form Title"},"fontSizeTitle":{"type":"number","default":35},"fontSizeLabel":{"type":"number","default":18},"colorTitle":{"type":"string","default":"#f00"},"colorLabel":{"type":"string","default":"#f00"},"fontSizeLabels":{"type":"number","default":12},"colorLabels":{"type":"string","default":"#f00"},"paddingTable":{"type":"number","default":30},"gapRow":{"type":"number","default":5},"gapColumn":{"type":"number","default":5},"marginBottomTitle":{"type":"number","default":5},"paddingInlineButton":{"type":"number","default":24},"paddingBlockButton":{"type":"number","default":10},"sizeTextButton":{"type":"number","default":18},"colorTextButton":{"type":"string","default":"#FFFFFF"},"colorBgButton":{"type":"string","default":"#000000"},"colorBgTable":{"type":"string","default":"#FFFFFF"},"hoverColorBgButton":{"type":"string","default":"#FFFFFF"},"hoverColorTextButton":{"type":"string","default":"#000000"},"marginTopBtn":{"type":"number","default":30},"alignment":{"type":"string","default":"start"},"alignmentBtn":{"type":"string","default":"start"},"btnTitle":{"type":"string","default":"Submit"},"titleFormPayU":{"type":"string","default":"Payment Details"},"labelService":{"type":"string","default":"Choose Service"},"serviceOptions":{"type":"string","default":""},"labelOptions":{"type":"string","default":"Turniej A - 200pln:200, Turniej B - 500pln:500, Turniej C - 1000pln:1000"},"titleCost":{"type":"string","default":"Cost Service"},"fields":{"type":"array","default":[[{"label":"Name","type":"Text"},{"label":"Username","type":"Text"}],[{"label":"Email","type":"Email"},{"label":"Phone","type":"Number"}]]},"enablePayU":{"type":"boolean","default":false}},"supports":{"color":{"text":true,"link":true,"background":true}},"textdomain":"form-creator","editorScript":"file:./index.js","editorStyle":"file:./index.css"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/form-creator","version":"0.1.0","title":"Form Creator","category":"widgets","icon":"smiley","description":"Example block scaffolded with Create Block tool.","example":{},"attributes":{"formTitle":{"type":"string","default":"Form Title"},"fontSizeTitle":{"type":"number","default":35},"fontSizeLabel":{"type":"number","default":18},"borderRadiusTable":{"type":"number","default":18},"borderWidthTable":{"type":"number","default":0},"borderColorTable":{"type":"string","default":"#f00"},"colorTitle":{"type":"string","default":"#f00"},"colorLabel":{"type":"string","default":"#f00"},"fontSizeLabels":{"type":"number","default":12},"colorLabels":{"type":"string","default":"#f00"},"paddingTable":{"type":"number","default":30},"gapRow":{"type":"number","default":5},"gapColumn":{"type":"number","default":5},"marginBottomTitle":{"type":"number","default":5},"paddingInlineButton":{"type":"number","default":24},"paddingBlockButton":{"type":"number","default":10},"sizeTextButton":{"type":"number","default":18},"colorTextButton":{"type":"string","default":"#FFFFFF"},"colorBgButton":{"type":"string","default":"#000000"},"colorBgTable":{"type":"string","default":"#FFFFFF"},"hoverColorBgButton":{"type":"string","default":"#FFFFFF"},"hoverColorTextButton":{"type":"string","default":"#000000"},"marginTopBtn":{"type":"number","default":30},"alignment":{"type":"string","default":"start"},"alignmentBtn":{"type":"string","default":"start"},"btnTitle":{"type":"string","default":"Submit"},"titleFormPayU":{"type":"string","default":"Payment Details"},"labelService":{"type":"string","default":"Choose Service"},"serviceOptions":{"type":"string","default":""},"labelOptions":{"type":"string","default":"Turniej A - 200pln:200, Turniej B - 500pln:500, Turniej C - 1000pln:1000"},"titleCost":{"type":"string","default":"Cost Service"},"fields":{"type":"array","default":[[{"label":"Name","type":"Text"},{"label":"Username","type":"Text"}],[{"label":"Email","type":"Email"},{"label":"Phone","type":"Number"}]]},"enablePayU":{"type":"boolean","default":false}},"supports":{"color":{"text":true,"link":true,"background":true}},"textdomain":"form-creator","editorScript":"file:./index.js","editorStyle":"file:./index.css"}');
 
 /***/ })
 

@@ -13,6 +13,20 @@ const SettingsFormPanel = ({ attributes, setAttributes }) => {
 			<PanelRow className="titleRow">Setting Form</PanelRow>
 
 			<RangeControl
+				label="Border Radius Table"
+				value={attributes.borderRadiusTable}
+				onChange={(value) => setAttributes({ borderRadiusTable: value })}
+				min={2}
+				max={150}
+			/>
+			<RangeControl
+				label="Border Width Table"
+				value={attributes.borderWidthTable}
+				onChange={(value) => setAttributes({ borderWidthTable: value })}
+				min={0}
+				max={150}
+			/>
+			<RangeControl
 				label="Padding Table"
 				value={attributes.paddingTable}
 				onChange={(value) => setAttributes({ paddingTable: value })}

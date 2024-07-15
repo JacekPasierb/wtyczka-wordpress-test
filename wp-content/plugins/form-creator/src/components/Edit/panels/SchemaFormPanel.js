@@ -13,6 +13,15 @@ const SchemaFormPanel = ({ attributes, setAttributes }) => {
 				enableAlpha
 				defaultValue="#000"
 			/>
+			<PanelRow className="titleRow">Set Border Color</PanelRow>
+			<ColorPicker
+				color={attributes.borderColorTable}
+				onChange={(value) => {
+					setAttributes({ borderColorTable: value });
+				}}
+				enableAlpha
+				defaultValue="#000"
+			/>
 			<PanelRow className="titleRow">Set Title Color</PanelRow>
 
 			<ColorPicker

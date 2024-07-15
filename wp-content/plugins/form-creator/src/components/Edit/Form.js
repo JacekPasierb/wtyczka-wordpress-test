@@ -44,6 +44,9 @@ const Form = ({ attributes }) => {
 				flexDirection: "column",
 				backgroundColor: `${attributes.colorBgTable}`,
 				padding: `${attributes.paddingTable}px`,
+				borderRadius: `${attributes.borderRadiusTable}px`,
+				"--borderWidth": `${attributes.borderWidthTable}px`,
+				"--borderColor":`${attributes.borderColorTable}`,
 			}}
 			className="custom-form"
 		>

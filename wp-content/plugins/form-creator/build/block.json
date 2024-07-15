@@ -21,6 +21,18 @@
       "type": "number",
       "default": 18
     },
+    "borderRadiusTable": {
+      "type": "number",
+      "default": 18
+    },
+    "borderWidthTable": {
+      "type": "number",
+      "default": 0
+    },
+    "borderColorTable": {
+      "type": "string",
+      "default": "#f00"
+    },
     "colorTitle": {
       "type": "string",
       "default": "#f00"
