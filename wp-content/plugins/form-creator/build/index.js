@@ -152,7 +152,9 @@ const Form = ({
       display: "flex",
       flexDirection: "row",
       gap: `${attributes.gapRow}px`,
-      alignItems: "center"
+      alignItems: "center",
+      "--colorLabel": `${attributes.colorLabel}`,
+      "--sizeLabel": `${attributes.fontSizeLabel}px`
     },
     className: "form-row"
   }, Array.isArray(row) ? row.map((field, index) => field.type === "select" ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
@@ -174,7 +176,9 @@ const Form = ({
       flexDirection: "row",
       gap: "20px",
       alignItems: "flex-end",
-      justifyContent: "flex-end"
+      justifyContent: "flex-end",
+      "--colorLabel": `${attributes.colorLabel}`,
+      "--sizeLabel": `${attributes.fontSizeLabel}px`
     },
     className: "payu-section"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
@@ -192,7 +196,9 @@ const Form = ({
       marginBottom: "10px",
       display: "flex",
       flexDirection: "row",
-      gap: "10px"
+      gap: "10px",
+      "--colorLabel": `${attributes.colorLabel}`,
+      "--sizeLabel": `${attributes.fontSizeLabel}px`
     },
     className: "payu-fields"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
@@ -527,6 +533,17 @@ const SchemaFormPanel = ({
     defaultValue: "#000"
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, {
     className: "titleRow"
+  }, "Set Label Color"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ColorPicker, {
+    color: attributes.colorLabel,
+    onChange: value => {
+      setAttributes({
+        colorLabel: value
+      });
+    },
+    enableAlpha: true,
+    defaultValue: "#000"
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, {
+    className: "titleRow"
   }, "Set Text Color Button"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ColorPicker, {
     color: attributes.colorTextButton,
     onChange: value => {
@@ -662,6 +679,18 @@ const SettingsFormPanel = ({
     onChange: value => {
       setAttributes({
         marginBottomTitle: value
+      });
+    },
+    min: 2,
+    max: 150
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, {
+    className: "titleRow"
+  }, "Setting Labels"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.RangeControl, {
+    label: "Font Size Label",
+    value: attributes.fontSizeLabel,
+    onChange: newFontSize => {
+      setAttributes({
+        fontSizeLabel: newFontSize
       });
     },
     min: 2,
@@ -1244,7 +1273,7 @@ module.exports = window["wp"]["i18n"];
   \************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/form-creator","version":"0.1.0","title":"Form Creator","category":"widgets","icon":"smiley","description":"Example block scaffolded with Create Block tool.","example":{},"attributes":{"formTitle":{"type":"string","default":"Form Title"},"fontSizeTitle":{"type":"number","default":35},"colorTitle":{"type":"string","default":"#f00"},"fontSizeLabels":{"type":"number","default":12},"colorLabels":{"type":"string","default":"#f00"},"paddingTable":{"type":"number","default":30},"gapRow":{"type":"number","default":5},"gapColumn":{"type":"number","default":5},"marginBottomTitle":{"type":"number","default":5},"paddingInlineButton":{"type":"number","default":24},"paddingBlockButton":{"type":"number","default":10},"sizeTextButton":{"type":"number","default":18},"colorTextButton":{"type":"string","default":"#FFFFFF"},"colorBgButton":{"type":"string","default":"#000000"},"colorBgTable":{"type":"string","default":"#FFFFFF"},"hoverColorBgButton":{"type":"string","default":"#FFFFFF"},"hoverColorTextButton":{"type":"string","default":"#000000"},"marginTopBtn":{"type":"number","default":30},"alignment":{"type":"string","default":"start"},"alignmentBtn":{"type":"string","default":"start"},"btnTitle":{"type":"string","default":"Submit"},"titleFormPayU":{"type":"string","default":"Payment Details"},"labelService":{"type":"string","default":"Choose Service"},"serviceOptions":{"type":"string","default":""},"labelOptions":{"type":"string","default":"Turniej A - 200pln:200, Turniej B - 500pln:500, Turniej C - 1000pln:1000"},"titleCost":{"type":"string","default":"Cost Service"},"fields":{"type":"array","default":[[{"label":"Name","type":"Text"},{"label":"Username","type":"Text"}],[{"label":"Email","type":"Email"},{"label":"Phone","type":"Number"}]]},"enablePayU":{"type":"boolean","default":false}},"supports":{"color":{"text":true,"link":true,"background":true}},"textdomain":"form-creator","editorScript":"file:./index.js","editorStyle":"file:./index.css"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/form-creator","version":"0.1.0","title":"Form Creator","category":"widgets","icon":"smiley","description":"Example block scaffolded with Create Block tool.","example":{},"attributes":{"formTitle":{"type":"string","default":"Form Title"},"fontSizeTitle":{"type":"number","default":35},"fontSizeLabel":{"type":"number","default":18},"colorTitle":{"type":"string","default":"#f00"},"colorLabel":{"type":"string","default":"#f00"},"fontSizeLabels":{"type":"number","default":12},"colorLabels":{"type":"string","default":"#f00"},"paddingTable":{"type":"number","default":30},"gapRow":{"type":"number","default":5},"gapColumn":{"type":"number","default":5},"marginBottomTitle":{"type":"number","default":5},"paddingInlineButton":{"type":"number","default":24},"paddingBlockButton":{"type":"number","default":10},"sizeTextButton":{"type":"number","default":18},"colorTextButton":{"type":"string","default":"#FFFFFF"},"colorBgButton":{"type":"string","default":"#000000"},"colorBgTable":{"type":"string","default":"#FFFFFF"},"hoverColorBgButton":{"type":"string","default":"#FFFFFF"},"hoverColorTextButton":{"type":"string","default":"#000000"},"marginTopBtn":{"type":"number","default":30},"alignment":{"type":"string","default":"start"},"alignmentBtn":{"type":"string","default":"start"},"btnTitle":{"type":"string","default":"Submit"},"titleFormPayU":{"type":"string","default":"Payment Details"},"labelService":{"type":"string","default":"Choose Service"},"serviceOptions":{"type":"string","default":""},"labelOptions":{"type":"string","default":"Turniej A - 200pln:200, Turniej B - 500pln:500, Turniej C - 1000pln:1000"},"titleCost":{"type":"string","default":"Cost Service"},"fields":{"type":"array","default":[[{"label":"Name","type":"Text"},{"label":"Username","type":"Text"}],[{"label":"Email","type":"Email"},{"label":"Phone","type":"Number"}]]},"enablePayU":{"type":"boolean","default":false}},"supports":{"color":{"text":true,"link":true,"background":true}},"textdomain":"form-creator","editorScript":"file:./index.js","editorStyle":"file:./index.css"}');
 
 /***/ })
 

@@ -23,6 +23,15 @@ const SchemaFormPanel = ({ attributes, setAttributes }) => {
 				enableAlpha
 				defaultValue="#000"
 			/>
+			<PanelRow className="titleRow">Set Label Color</PanelRow>
+			<ColorPicker
+				color={attributes.colorLabel}
+				onChange={(value) => {
+					setAttributes({ colorLabel: value });
+				}}
+				enableAlpha
+				defaultValue="#000"
+			/>
 			<PanelRow className="titleRow">Set Text Color Button</PanelRow>
 			<ColorPicker
 				color={attributes.colorTextButton}

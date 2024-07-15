@@ -17,7 +17,15 @@
       "type": "number",
       "default": 35
     },
+    "fontSizeLabel": {
+      "type": "number",
+      "default": 18
+    },
     "colorTitle": {
+      "type": "string",
+      "default": "#f00"
+    },
+    "colorLabel": {
       "type": "string",
       "default": "#f00"
     },

@@ -76,6 +76,8 @@ const Form = ({ attributes }) => {
 							flexDirection: "row",
 							gap: `${attributes.gapRow}px`,
 							alignItems: "center",
+							"--colorLabel": `${attributes.colorLabel}`,
+							"--sizeLabel": `${attributes.fontSizeLabel}px`,
 						}}
 						className="form-row"
 					>
@@ -114,6 +116,8 @@ const Form = ({ attributes }) => {
 						gap: "20px",
 						alignItems: "flex-end",
 						justifyContent: "flex-end",
+						"--colorLabel": `${attributes.colorLabel}`,
+						"--sizeLabel": `${attributes.fontSizeLabel}px`,
 					}}
 					className="payu-section"
 				>
@@ -145,6 +149,8 @@ const Form = ({ attributes }) => {
 							display: "flex",
 							flexDirection: "row",
 							gap: "10px",
+							"--colorLabel": `${attributes.colorLabel}`,
+							"--sizeLabel": `${attributes.fontSizeLabel}px`,
 						}}
 						className="payu-fields"
 					>

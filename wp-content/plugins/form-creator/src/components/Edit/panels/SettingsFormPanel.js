@@ -75,6 +75,16 @@ const SettingsFormPanel = ({ attributes, setAttributes }) => {
 				min={2}
 				max={150}
 			/>
+			<PanelRow className="titleRow">Setting Labels</PanelRow>
+			<RangeControl
+				label="Font Size Label"
+				value={attributes.fontSizeLabel}
+				onChange={(newFontSize) => {
+					setAttributes({ fontSizeLabel: newFontSize });
+				}}
+				min={2}
+				max={150}
+			/>
 			<PanelRow className="titleRow">Setting Button</PanelRow>
 			<RangeControl
 				label="Padding Inline Button"
