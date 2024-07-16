@@ -9,7 +9,7 @@ const FormFields = ({ attributes }) => {
 				className="form-control"
 			>
 				<label for={`sel` + rowIndex + index}>{field.label}</label>
-				<select id={`sel` + rowIndex + index} name={`sel` + rowIndex + index}>
+				<select id={`sel` + rowIndex + index} name={field.label}>
 					{field.options.map((option, optionIndex) => (
 						<option key={optionIndex} value={option}>
 							{option}
@@ -27,7 +27,7 @@ const FormFields = ({ attributes }) => {
 				<input
 					type={field.type}
 					id={`inp` + rowIndex + index}
-					name={`inp` + rowIndex + index}
+					name={field.label}
 				/>
 			</div>
 		);

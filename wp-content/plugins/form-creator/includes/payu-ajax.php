@@ -3,7 +3,7 @@ add_action('wp_ajax_form_creator_payment', 'process_form_creator_payment');
 add_action('wp_ajax_nopriv_form_creator_payment', 'process_form_creator_payment');
 
 function process_form_creator_payment() {
-    check_ajax_referer('your_nonce_action', '_ajax_nonce');
+    check_ajax_referer('your_nonce_action_your_form', '_ajax_nonce');
     require dirname( __DIR__ ) . '/vendor/autoload.php';
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST' ) {

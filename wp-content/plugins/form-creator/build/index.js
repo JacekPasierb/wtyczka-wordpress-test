@@ -827,7 +827,7 @@ const FormFields = ({
       for: `sel` + rowIndex + index
     }, field.label), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
       id: `sel` + rowIndex + index,
-      name: `sel` + rowIndex + index
+      name: field.label
     }, field.options.map((option, optionIndex) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
       key: optionIndex,
       value: option
@@ -843,7 +843,7 @@ const FormFields = ({
     }, field.label), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
       type: field.type,
       id: `inp` + rowIndex + index,
-      name: `inp` + rowIndex + index
+      name: field.label
     }));
   };
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
