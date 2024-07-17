@@ -84,4 +84,28 @@ function process_form_creator_payment() {
         }
     }
 }
+
+add_action('wp_ajax_my_custom_action', 'process_my_custom_action');
+add_action('wp_ajax_nopriv_my_custom_action', 'process_my_custom_action');
+
+function process_my_custom_action() {
+    check_ajax_referer('your_nonce_action_other_form', '_ajax_nonce');
+    
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // Przetwarzanie danych formularza
+        $form_fields = isset($_POST['form_fields']) ? $_POST['form_fields'] : [];
+        $sanitized_fields = [];
+        foreach ($_POST as $key => $value) {
+            $sanitized_fields[$key] = sanitize_text_field($value);
+        }
+
+        do_action('form_completed', $sanitized_fields);
+        // Odpowiedź w przypadku sukcesu
+        wp_send_json_success(['message' => 'Dane formularza zostały przetworzone pomyślnie.']);
+    } else {
+        // Odpowiedź w przypadku błędu
+        wp_send_json_error(['message' => 'Błąd przy przetwarzaniu formularza.']);
+    }
+}
+
 ?>

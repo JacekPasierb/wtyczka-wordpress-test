@@ -1,12 +1,13 @@
+
 <?php
 function form_creator_enqueue_scripts() {
     // Rejestrowanie skryptów
-   
-    wp_register_script('form-creator-ajax', plugin_dir_url(__DIR__) . '/form-creator-ajax.js', ['jquery'], null, true);
+    wp_register_script('validation-script', plugin_dir_url(__FILE__) . '../validation.js', [], null, true);
+    wp_register_script('form-creator-ajax', plugin_dir_url(__DIR__) . '/form-creator-ajax.js', [], null, true);
 
     // Kolejkowanie skryptów
-    wp_enqueue_script('jquery');
-  
+    
+    wp_enqueue_script('validation-script');
     wp_enqueue_script('form-creator-ajax'); // Później rejestrujemy skrypt form-creator-ajax
 
     // Lokalizowanie skryptu form-creator-ajax
